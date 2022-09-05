@@ -30,10 +30,10 @@ CREATE TABLE users (
 
 CREATE TABLE request (
 	request_id int DEFAULT nextval('seq_request_id'),
-	creator_id int NOT NULL,
+	user_id int NOT NULL,
 	decision_time time NOT NULL, 
 	decision_date date NOT NULL,
-	CONSTRAINT FK_request_creator_id FOREIGN KEY (creator_id) REFERENCES users (user_id),
+	CONSTRAINT FK_request_creator_id FOREIGN KEY (user_id) REFERENCES users (user_id),
 	CONSTRAINT PK_request PRIMARY KEY (request_id)
 );
 

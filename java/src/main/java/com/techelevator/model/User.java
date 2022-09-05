@@ -2,19 +2,34 @@ package com.techelevator.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+@Entity
+@Table(name = "users")
 public class User {
 
+   @Id
+   @GeneratedValue(strategy = GenerationType.AUTO)
+   @Column(name = "user_id")
    private Long id;
+
    private String username;
    @JsonIgnore
    private String password;
    @JsonIgnore
    private boolean activated;
+
+   @Transient
    private Set<Authority> authorities = new HashSet<>();
+
+   @OneToMany(mappedBy = "creator")
+   private Set<Request> requests;
+
+   @ManyToMany(mappedBy = "invitedUsers")
+   Set<Request> userInvites;
 
    public User() { }
 
