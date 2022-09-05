@@ -1,5 +1,6 @@
 import React from 'react'
-import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";import axios from 'axios'
+import { baseUrl } from '../../Shared/baseUrl'
 
 export default function Home(props) {
 
@@ -35,12 +36,19 @@ export default function Home(props) {
                 return
             }
             //load list of matches from endpoint
-            //if no match found alert and return else...
-            setMode("choices")
+            const restaurantData = axios.post(baseUrl + "/restaurants/" + zip)
+            .then(function (response){
+                console.log(restaurantData)
+                setMode("choices")
+            })
+            .catch(function (error){
+                alert("The ZIP code entered was not found!!!")
+            })
         }
         else if(city !== "" && state !== "") {
-            if(state.length > 2) {
-                alert("State must be entered in the form of a 2-letter abbreviation!!!")
+            const stateAbbreviations = [ 'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY' ]
+            if(!stateAbbreviations.includes(state)) {
+                alert("A valid two-letter state abbreviation must be entered!!!")
                 return
             }
             //load list of matches from endpoint
