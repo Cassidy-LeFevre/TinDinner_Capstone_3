@@ -3,13 +3,12 @@ package com.techelevator.controller;
 import com.techelevator.Repository.RestaurantRepository;
 import com.techelevator.model.Restaurant;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 public class RestaurantController {
     @Autowired
@@ -18,5 +17,18 @@ public class RestaurantController {
     @GetMapping("/restaurants/{zipCode}")
     List<Restaurant> findByZipCode(@Valid @PathVariable String zipCode){
         return restaurantRepository.findByZipCode(zipCode);
+    }
+
+
+
+    @GetMapping("/restaurants/by-city")
+    List<Restaurant> findByStateCity(@RequestParam String stateCity){
+        return restaurantRepository.findByStateCity(stateCity);
+    }
+
+
+    @GetMapping("/restaurants/by-name")
+    Restaurant findByRestaurantName(@RequestParam String name){
+        return restaurantRepository.findByRestaurantName(name);
     }
 }

@@ -33,6 +33,11 @@ public class Restaurant{
     @Size(min=2 , max =250)
     String address;
 
+
+    @NotNull
+    @Size(max = 50)
+    String stateCity;
+
     @Size(max = 20)
     String phoneNumber;
 
@@ -44,7 +49,8 @@ public class Restaurant{
 
     public Restaurant(){}
 
-    public Restaurant(String restaurantName, String zipCode, String hours, String type, String address, String phoneNumber, String thumbnailUrl){
+    public Restaurant(String stateCity, String restaurantName, String zipCode, String hours, String type, String address, String phoneNumber, String thumbnailUrl){
+        this.stateCity = stateCity;
         this.restaurantName = restaurantName;
         this.zipCode = zipCode;
         this.hours = hours;
@@ -84,6 +90,14 @@ public class Restaurant{
 
     public String getZipCode() {
         return zipCode;
+    }
+
+    public String getStateCity() {
+        return stateCity;
+    }
+
+    public void setStateCity(String stateCity) {
+        this.stateCity = stateCity;
     }
 
     public void setPhoneNumber(String phoneNumber) {

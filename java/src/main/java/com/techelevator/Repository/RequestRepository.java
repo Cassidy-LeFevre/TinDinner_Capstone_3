@@ -18,6 +18,10 @@ public interface RequestRepository extends JpaRepository<Request, Integer> {
 
 
     Request findByRequestId(int id);
+
+
     Request save(Request request);
+
+
     void delete(Request request);
 }
