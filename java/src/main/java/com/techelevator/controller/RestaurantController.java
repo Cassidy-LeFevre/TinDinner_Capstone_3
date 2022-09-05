@@ -28,7 +28,7 @@ public class RestaurantController {
 
 
     @GetMapping("/restaurants/by-name")
-    Restaurant findByRestaurantName(@RequestParam String name){
+    List<Restaurant> findByRestaurantName(@RequestParam String name){
         return restaurantRepository.findByRestaurantName(name);
     }
 }
