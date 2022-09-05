@@ -17,7 +17,7 @@ export default function Register(props) {
         setState({...state, [event.target.name]: event.target.value})
     }
 
-    function continueSubmit(e) {
+    function handleSubmit(e) {
         e.preventDefault()
         const data = {username: state.username, password: state.password, confirmPassword: state.confirmPassword, role: 'USER'}
         let lowercase = 0
@@ -44,19 +44,14 @@ export default function Register(props) {
         }
         if(lowercase && uppercase && digit){
             axios.post(baseUrl + "/register", data)
-            setState({...state, mode: "ready"})
+            .then(function (response){
+                setState({...state, mode: "ready"})
+            })
+            .catch(function (error){
+                alert("The username (email) already exists!!!")
+            })
         }
         else alert("Password must contain at least one capital letter, one lowercase letter and one number!!!")
-    }
-
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        // const data = { username: state.username, password: state.password }; // adjust data for endpoint access or remove it
-        // const users = await axios.post(baseUrl + '/users', data) // fix backend to list users at endpoint
-        // if(users.includes(state.username)) continueSubmit(e) // make sure this points to the usernames as expected
-        // else alert("A user with this email address already exists!!!") // this part should be okay
-
-        continueSubmit(e) // delete this once the above code is implemented
     }
 
     return(
