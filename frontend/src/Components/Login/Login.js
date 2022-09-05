@@ -27,11 +27,7 @@ class Login extends Component {
 
     handleLogin = async () => {
         const data = { username: this.state.username, password: this.state.password };
-        
-
         const userWithToken = await axios.post(baseUrl + '/login', data)
-
-        
         await this.props.dispatch(addToken(userWithToken.data.token))
         await this.props.dispatch(addUser(userWithToken.data.user));
     }
@@ -49,11 +45,11 @@ class Login extends Component {
                 <h1>Please Sign In</h1>
                 <label class="sr-only">Username</label>
                 <input
-                    type="text"
+                    type="email"
                     id="username"
                     name="username"
                     class="form-control"
-                    placeholder="Username"
+                    placeholder="Email"
                     v-model="user.username"
                     onChange={this.handleInputChange}
                     required
