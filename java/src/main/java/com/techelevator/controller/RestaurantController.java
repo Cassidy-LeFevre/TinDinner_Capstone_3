@@ -36,4 +36,5 @@ public class RestaurantController {
     List<Restaurant> findByType(@RequestParam String type){
         return restaurantRepository.findByType(type);
     }
+
 }

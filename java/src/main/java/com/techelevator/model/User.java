@@ -1,6 +1,9 @@
 package com.techelevator.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -17,15 +20,20 @@ public class User {
    private Long id;
 
    private String username;
+
    @JsonIgnore
+   @Transient
    private String password;
+
    @JsonIgnore
+   @Transient
    private boolean activated;
 
    @Transient
    private Set<Authority> authorities = new HashSet<>();
 
    @OneToMany(mappedBy = "creator")
+   @JsonBackReference
    private Set<Request> requests;
 
    @ManyToMany(mappedBy = "invitedUsers")
