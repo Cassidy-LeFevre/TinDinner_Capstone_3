@@ -1,5 +1,6 @@
 package com.techelevator.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -8,9 +9,10 @@ import java.sql.Timestamp;
 import java.util.Set;
 
 @Entity
+@Table(name="request")
 public class Request {
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     int requestId;
 
@@ -22,18 +24,21 @@ public class Request {
     User creator;
 
     @ManyToMany(fetch = FetchType.EAGER)
+    @JsonManagedReference
     @JoinTable(
             name = "request_user",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "request_id"))
+            joinColumns = @JoinColumn(name = "request_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
     Set<User> invitedUsers;
+
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name= "request_restaurant",
-            joinColumns = @JoinColumn(name = "restaurant_id"),
-            inverseJoinColumns = @JoinColumn(name ="request_id")
+            joinColumns = @JoinColumn(name = "request_id"),
+            inverseJoinColumns = @JoinColumn(name ="restaurant_id")
     )
+    @JsonManagedReference
     Set<Restaurant> restaurantsByRequest;
 
     Timestamp decisionDateTime;
@@ -49,6 +54,10 @@ public class Request {
 
     public int getRequestId() {
         return requestId;
+    }
+
+    public void setRequestId(int requestId) {
+        this.requestId = requestId;
     }
 
     public Timestamp getDecisionDateTime() {

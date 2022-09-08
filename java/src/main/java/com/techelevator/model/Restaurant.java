@@ -1,5 +1,6 @@
 package com.techelevator.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.springframework.data.relational.core.mapping.Table;
 
 import javax.persistence.*;
@@ -10,7 +11,7 @@ import java.util.Set;
 @Entity
 public class Restaurant{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int restaurantId;
 
     @NotNull
@@ -45,6 +46,7 @@ public class Restaurant{
     String thumbnailUrl;
 
     @ManyToMany(mappedBy = "restaurantsByRequest")
+    @JsonBackReference
     Set<Request> requestsByRestaurant;
 
     public Restaurant(){}
@@ -58,6 +60,18 @@ public class Restaurant{
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.thumbnailUrl = thumbnailUrl;
+    }
+
+    public void setRestaurantId(int restaurantId) {
+        this.restaurantId = restaurantId;
+    }
+
+    public Set<Request> getRequestsByRestaurant() {
+        return requestsByRestaurant;
+    }
+
+    public void setRequestsByRestaurant(Set<Request> requestsByRestaurant) {
+        this.requestsByRestaurant = requestsByRestaurant;
     }
 
     public String getPhoneNumber() {

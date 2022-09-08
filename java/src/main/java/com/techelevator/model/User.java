@@ -15,7 +15,7 @@ import java.util.Set;
 public class User {
 
    @Id
-   @GeneratedValue(strategy = GenerationType.AUTO)
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
    @Column(name = "user_id")
    private Long id;
 
@@ -36,8 +36,10 @@ public class User {
    @JsonBackReference
    private Set<Request> requests;
 
+   @JsonBackReference
    @ManyToMany(mappedBy = "invitedUsers")
    Set<Request> userInvites;
+
 
    public User() { }
 
@@ -46,6 +48,22 @@ public class User {
       this.username = username;
       this.password = password;
       this.activated = true;
+   }
+
+   public Set<Request> getRequests() {
+      return requests;
+   }
+
+   public Set<Request> getUserInvites() {
+      return userInvites;
+   }
+
+   public void setUserInvites(Set<Request> userInvites) {
+      this.userInvites = userInvites;
+   }
+
+   public void setRequests(Set<Request> requests) {
+      this.requests = requests;
    }
 
    public Long getId() {
