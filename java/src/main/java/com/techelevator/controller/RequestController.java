@@ -12,6 +12,10 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.Set;
 
+//TODO: Use security so user can only view own data, unless admin.
+//TODO: Make some form of streamlined testing.
+//TODO: Request and invitee do not exist---- maybe maybe not, it already returns nothing.
+
 @CrossOrigin
 @RestController
 public class RequestController {

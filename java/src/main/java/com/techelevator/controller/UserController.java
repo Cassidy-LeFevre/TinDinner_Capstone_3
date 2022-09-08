@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+//TODO: Write exception handling for if a user searched does not exist---- maybe maybe not, it already returns nothing.
+//TODO: Use security so user can only view own data, unless admin.
+
 @RestController
 public class UserController {
 
