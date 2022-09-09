@@ -6,6 +6,11 @@ import isOpen from './isOpen';
 export default function Home(props) {
 
     const loadedUser = useSelector(state => state.user)
+    // loadedUser.id = hostId
+
+    // React.useEffect(() => {         // THIS IS ONLY HERE FOR TESTING
+    //     console.log("USE EFFECT USED")
+    // }, [invitedGuests])
 
     const [mode, setMode] = React.useState("home")
 
@@ -15,15 +20,21 @@ export default function Home(props) {
 
     const [choices, setChoices] = React.useState([])
     const [selections, setSelections] = React.useState([])
+
     const [searchEmail, setSearchEmail] = React.useState("")
-    const [invitation, setInvitation] = React.useState(
-        {
-            hostId: loadedUser.id, // current user's user id
-            proposedRestaurants: [], // array of restaurant IDs - any thumbs-down will remove an ID from the invitation
-            invitedGuests: [], // array of guests (ids) invited to this outing
-            decisionDate: "" // expiration date
-        }
-    )
+    const [invitedGuests, setInvitedGuests] = React.useState([])
+    const [decisionDate, setDecisionDate] = React.useState("")
+
+    function clearState() {
+        setZip("")
+        setCity("")
+        setState("")
+        setChoices([])
+        setSelections([])
+        setSearchEmail("")
+        setInvitedGuests([])
+        setDecisionDate("")
+    }
 
     function getLocation() {
         setMode("locate")
@@ -118,10 +129,6 @@ export default function Home(props) {
         setMode("invite")
     }
 
-    // React.useEffect(() => {         // THIS IS ONLY HERE FOR TESTING
-    //     console.log(selections)
-    // }, [selections])
-
     function showCandidates() {
         if((zip !== "")||(city !== "" && state !== "")) {
             return (
@@ -151,54 +158,48 @@ export default function Home(props) {
         }
     }
 
-    function listGuests() { // error happening here - nothing is displaying (could be nothing in the array)
+    function listGuests() {
         return (
             <ul>
-                {invitation.invitedGuests.map((guest) => (
+                {invitedGuests.map((guest) => (
                     <li>
-                        {findUsernameByUserId(guest)}
-                        <button onClick={removeGuest(guest)}>Remove</button>
+                        {guest}<button onClick={() => removeGuest(guest)} >Remove</button>
                     </li>
                 ))}
             </ul>
         )
     }
 
-    function addGuest(event) { // error happening here - invitation.inviitedGuests is not updating
-        const guestId = findUserIdByUsername(event.target.id)
-        console.log(invitation.invitedGuests)
-        if(invitation.invitedGuests.length === 0) {
-            setInvitation({...invitation, [invitation.invitedGuests]: guestId})
-            return
-        }
-        let workingGuests = []
-        workingGuests.push([invitation.invitedGuests])
-        for(let i = 0; i < invitation.invitedGuests.length; i++) {
-            if(invitation.invitedGuests[i] == guestId) {
-                alert("You have already added this guest!!!")
-                return
+    function addGuest(event) {
+        const guestId = event.target.id
+        if(invitedGuests.length === 0) setInvitedGuests([guestId])
+        else {
+            for(let i = 0; i < invitedGuests.length; i++) {
+                if(invitedGuests[i] == guestId) {
+                    alert("You have already added this guest!!!")
+                    return
+                }
             }
+            setInvitedGuests([...invitedGuests, guestId])
         }
-        workingGuests.push([guestId])
-        setInvitation({...invitation, [invitation.invitedGuests]: workingGuests})
     }
 
-    function removeGuest(guestId) { // Haven't reached this for testing yet
+    function removeGuest(guestName) {
         let workingGuests = []
-        for(let i = 0; i < invitation.invitedGuests.length; i++) if(invitation.invitedGuests[i] != guestId) workingGuests.push(invitation.invitedGuests[i])
-        setInvitation({...invitation, invitedGuests: workingGuests})
+        for(let i = 0; i < invitedGuests.length; i++) if(invitedGuests[i] != guestName) workingGuests.push(invitedGuests[i])
+        setInvitedGuests(workingGuests)
     }
 
-    function findUserIdByUsername(emailAddress) { // replace with fetch later
-        // axios.get(baseUrl + "/users/" + emailAddress)
+    function findUserIdByUsername(emailAddress) { // check fetch before implementing
+        // axios.get(baseUrl + "/find-user", emailAddress)
         // .then(function (response){
         //     console.log(response.data)
         // })
-        return Math.floor(Math.random() * 100) + 5000
+        return (Math.floor(Math.random() * 20) + 5000).toString()
     }
 
-    function findUsernameByUserId(userNumber) { // replace with fetch later
-        // axios.get(baseUrl + "/users/" + emailAddress)
+    function findUsernameByUserId(userNumber) { // check fetch before implementing
+        // axios.get(baseUrl + "/user/" + userNumber)
         // .then(function (response){
         //     console.log(response.data)
         // })
@@ -209,10 +210,25 @@ export default function Home(props) {
         setSearchEmail(event.target.value)
     }
 
+    function updateDate(event) {
+        setDecisionDate(event.target.value)
+    }
+
     function submitInvite(event) {
         event.preventDefault()
-        //do other stuff
-        //make sure to assign: invitation.proposedRestaurants = selections using setState()
+        if(invitedGuests.length === 0) {
+            alert("You need to invite at least one person to your outing!!!")
+            return
+        }
+        if(decisionDate === "") {
+            alert("You must select a deadline for responses!!!")
+            return
+        }
+
+        // create data to send to backend to save this request
+
+        clearState()
+        setMode("link")
     }
 
     return(
@@ -243,10 +259,19 @@ export default function Home(props) {
                 <form onSubmit={submitInvite}>
                     <input type="email" placeholder="Add a guest (email)" value={searchEmail} onChange={updateSearchEmail}/>
                     <button type="button" id={searchEmail} onClick={addGuest}>Add</button>
-                    {invitation.invitedGuests.length > 0 && listGuests()}
+                    <br/>
+                    {listGuests()}
+                    <hr/>
+                    <h4>Choose a deadline for a decision</h4>
+                    <input type="datetime-local" id="decisiontime" name="decisiontime" onChange={updateDate}/>
                     <hr/>
                     <input type="submit" value="Submit" />
                 </form>
+            </div>}
+
+            {mode==="link" && <div>
+                <h2>Invitation saved!  Here is the link your guests can visit to vote on your restaurant selections:</h2>
+                <h3>LINK TO REQUEST</h3>
             </div>}
 
         </div>

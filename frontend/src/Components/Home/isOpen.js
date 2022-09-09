@@ -1,4 +1,5 @@
 export default function isOpen(hoursList) {
+    if(hoursList === "Open 24 hours") return true
     const today = new Date()
     const daysOfTheWeek = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     const day = daysOfTheWeek[today.getDay()];
@@ -13,6 +14,7 @@ export default function isOpen(hoursList) {
             dayBeforeString = i === 0 ? hoursArray[6].split(" ")[1] : hoursArray[i - 1].split(" ")[1]
         }
     }
+    if(isolatedHoursString === "Closed") return false
     const openingString = isolatedHoursString.split("–")[0]
     const closingString = isolatedHoursString.split("–")[1]
     const dayBeforeOpeningString = isolatedHoursString.split("–")[0]
