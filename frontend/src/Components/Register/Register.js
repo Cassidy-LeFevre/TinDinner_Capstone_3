@@ -56,10 +56,10 @@ export default function Register(props) {
 
     return(
         <div className="register--page">
-            {state.mode==="entry" && <form>
+            {state.mode==="entry" && <form className="register--form">
                 <h1 className="register--title" >Create Account</h1>
                 <label class="sr-only">Username</label>
-                <input className="register--input"
+                <input className="register--email"
                     type="email"
                     id="username"
                     name="username"
@@ -70,7 +70,7 @@ export default function Register(props) {
                     required
                 />
                 <label class="sr-only">Password</label>
-                <input className="register--input"
+                <input className="register--password"
                     type="password"
                     id="password"
                     name="password"
@@ -80,7 +80,7 @@ export default function Register(props) {
                     onChange={handleInputChange}
                     required
                 />
-                <input className="register--input"
+                <input className="register--confirmpassword"
                     type="password"
                     id="password-confirm"
                     name="confirmPassword"
@@ -93,7 +93,7 @@ export default function Register(props) {
                 <Link to="/login" className="register--login">Have an account?</Link>
                 <input className="register--submit" type="submit" onClick={handleSubmit} />
             </form>}
-            {state.mode==="ready" && <Link to="/login">Sign In</Link>}
+            {state.mode==="ready" && <Link to="/login" className="register--ready">Sign In</Link>}
         </div>
     )
 }
