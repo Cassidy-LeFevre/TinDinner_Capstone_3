@@ -41,33 +41,36 @@ class Login extends Component {
 
     render(){
         return(
-            <div>
-                <h1>Please Sign In</h1>
-                <label class="sr-only">Username</label>
-                <input
-                    type="email"
-                    id="username"
-                    name="username"
-                    class="form-control"
-                    placeholder="Email"
-                    v-model="user.username"
-                    onChange={this.handleInputChange}
-                    required
-                />
-                <label class="sr-only">Password</label>
-                <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    class="form-control"
-                    placeholder="Password"
-                    v-model="user.password"
-                    onChange={this.handleInputChange}
-                    required
-                />
-                <Link to="/register">Need an account?</Link>
-                <button type="submit" onClick={this.handleLogin}>Sign in</button>
-            </div>
+            <body className="login--body">
+                <div className="login--container">
+                    <h1 className="login--title">Tindinner</h1>
+                    <h1>Please Sign In</h1>
+                    <label className="login--usernameText" class="sr-only">Username</label>
+                    <input className="login--email"
+                        type="email"
+                        id="username"
+                        name="username"
+                        class="form-control"
+                        placeholder="Email"
+                        v-model="user.username"
+                        onChange={this.handleInputChange}
+                        required
+                    />
+                    <label className="login--passwordText" class="sr-only">Password</label>
+                    <input className="login--email"
+                        type="password"
+                        id="password"
+                        name="password"
+                        class="form-control"
+                        placeholder="Password"
+                        v-model="user.password"
+                        onChange={this.handleInputChange}
+                        required
+                    />
+                    <Link className="login--register" to="/register">Need an account?</Link>
+                    <button className="login--signin" type="submit" onClick={this.handleLogin}>Sign in</button>
+                </div>
+            </body>
         )
     }
 }

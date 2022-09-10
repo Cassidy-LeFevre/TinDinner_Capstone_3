@@ -9,42 +9,40 @@
 </head>
 <body>
     <div class="square">
-    <header>
-    
-    <h1>Tindinner</h1>
-</header>
-<b>
-                <label class="sr-only" id="usernameText">Email</label>
-                <br/>
-                <input
-                    type="email"
-                    id="username"
-                    name="username"
-                    class="form-control"
-                    
-                    v-model="user.username"
-                    onChange={this.handleInputChange}
-                    required
-                />
-                <br/>
-                <label class="sr-only" id = "passwordText">Password</label>
-                <br/>
-                <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    class="form-control"
-                    
-                    v-model="user.password"
-                    onChange={this.handleInputChange}
-                    required
-                />
-                <br/>
-                <button id = "signin" type="submit" onClick={this.handleLogin}>Log in</button>
-                <br/>
-                <a href="/register" id ="register">Need an account?</a>
-</b> 
-            </div>               
+        <header>
+            <h1>Tindinner</h1>
+        </header>
+        <b>
+            <label class="sr-only" id="usernameText">Email</label>
+            <br/>
+            <input
+                type="email"
+                id="username"
+                name="username"
+                class="form-control"
+                v-model="user.username"
+                onChange={this.handleInputChange}
+                required
+            />
+            <br/>
+            <label class="sr-only" id = "passwordText">Password</label>
+            <br/>
+            <input
+                type="password"
+                id="password"
+                name="password"
+                class="form-control"
+                
+                v-model="user.password"
+                onChange={this.handleInputChange}
+                required
+            />
+            <br/>
+            <button id = "signin" type="submit" onClick={this.handleLogin}>Log in</button>
+            <br/>
+            <a href="/register" id ="register">Need an account?</a>
+        </b>
+    </div>               
 </body>
 
 </html>

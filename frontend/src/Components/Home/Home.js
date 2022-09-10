@@ -25,6 +25,8 @@ export default function Home(props) {
     const [invitedGuests, setInvitedGuests] = React.useState([])
     const [decisionDate, setDecisionDate] = React.useState("")
 
+    const [invitationId, setInvitationId] = React.useState("")
+
     function clearState() {
         setZip("")
         setCity("")
@@ -34,6 +36,7 @@ export default function Home(props) {
         setSearchEmail("")
         setInvitedGuests([])
         setDecisionDate("")
+        setInvitationId("")
     }
 
     function getLocation() {
@@ -224,11 +227,49 @@ export default function Home(props) {
             alert("You must select a deadline for responses!!!")
             return
         }
-
-        // create data to send to backend to save this request
-
+        const decisionDateTime = decisionDate.replace("T", " ") + ":00"
+        //THE FOLLOWING RESULTS IN AN ERROR 400:
+        axios.post(baseUrl + '/send-request',
+            {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data: {
+                    userId: loadedUser.id,
+                    inviteeIds: invitedGuests,
+                    restaurantIds: selections,
+                    decisionDateTime: decisionDateTime
+                }
+            }
+        )
+        .then(function (response){
+            if(response.data.length === 0) {
+                alert("There was a problem while saving the invitation!!!")
+                return
+            }
+            setInvitationId(response.data) // finisih the .path
+            console.log(response.data + " : " + invitationId) // take this out after testing
+            setMode("choices")
+        })
         clearState()
         setMode("link")
+    }
+
+    function reviewRequests() {
+        setMode("review")
+    }
+
+    function listRequests() {
+        // fetch all requests by user first
+        return (
+            <ul>
+                {invitedGuests.map((guest) => ( // change to map over requests returned
+                    <li>
+                        {guest}<button onClick={() => removeGuest(guest)} >Remove</button>
+                    </li>
+                ))}
+            </ul>
+        )
     }
 
     return(
@@ -236,7 +277,7 @@ export default function Home(props) {
 
             {mode==="home" && <div>
                 <button onClick={getLocation}>Send request to go out</button>
-                <button>Review requests</button>
+                <button onClick={reviewRequests}>Review requests</button>
             </div>}
 
             {mode==="locate" && <div>
@@ -272,6 +313,12 @@ export default function Home(props) {
             {mode==="link" && <div>
                 <h2>Invitation saved!  Here is the link your guests can visit to vote on your restaurant selections:</h2>
                 <h3>LINK TO REQUEST</h3>
+            </div>}
+
+            {mode==="review" && <div>
+                <h2>Your Requests</h2>
+                <hr/>
+                {listRequests()}
             </div>}
 
         </div>
