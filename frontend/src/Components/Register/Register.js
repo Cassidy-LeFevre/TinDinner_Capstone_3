@@ -57,8 +57,7 @@ export default function Register(props) {
     return(
         <div className="register--page">
             {state.mode==="entry" && <form>
-                <h1>Create Account</h1>
-                <hr className="register-rule"/>
+                <h1 className="register--title" >Create Account</h1>
                 <label class="sr-only">Username</label>
                 <input className="register--input"
                     type="email"

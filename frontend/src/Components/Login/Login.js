@@ -45,30 +45,35 @@ class Login extends Component {
                 <div className="login--container">
                     <h1 className="login--title">Tindinner</h1>
                     <h1>Please Sign In</h1>
-                    <label className="login--usernameText" class="sr-only">Username</label>
-                    <input className="login--email"
-                        type="email"
-                        id="username"
-                        name="username"
-                        class="form-control"
-                        placeholder="Email"
-                        v-model="user.username"
-                        onChange={this.handleInputChange}
-                        required
-                    />
-                    <label className="login--passwordText" class="sr-only">Password</label>
-                    <input className="login--email"
-                        type="password"
-                        id="password"
-                        name="password"
-                        class="form-control"
-                        placeholder="Password"
-                        v-model="user.password"
-                        onChange={this.handleInputChange}
-                        required
-                    />
-                    <Link className="login--register" to="/register">Need an account?</Link>
+                    <div className="login--email">
+                        <label class="sr-only">Username</label>
+                        <input className="login--usernameText"
+                            type="email"
+                            id="username"
+                            name="username"
+                            class="form-control"
+                            placeholder="Email"
+                            v-model="user.username"
+                            onChange={this.handleInputChange}
+                            required
+                        />
+                    </div>
+                    <div className="login--password">
+                        <label class="sr-only">Password</label>
+                        <input className="login--passwordText"
+                            type="password"
+                            id="password"
+                            name="password"
+                            class="form-control"
+                            placeholder="Password"
+                            v-model="user.password"
+                            onChange={this.handleInputChange}
+                            required
+                        />
+                    </div>
                     <button className="login--signin" type="submit" onClick={this.handleLogin}>Sign in</button>
+                    <br/>
+                    <Link className="login--register" to="/register">Need an account?</Link>
                 </div>
             </body>
         )

@@ -135,25 +135,24 @@ export default function Home(props) {
     function showCandidates() {
         if((zip !== "")||(city !== "" && state !== "")) {
             return (
-                <ul>
+                <ul className="choices--list">
                     {choices.map((choice) => (
-                        <li id={choice.restaurantId} choiceZip={choice.zipCode}>
-                            <h3>{choice.restaurantName}</h3>
-                            {choice.thumbnailUrl && <img src={choice.thumbnailUrl} Alt="Restaurant view"/>}
-                            <h4>{choice.address}</h4>
-                            {isOpen(choice.hours) && <h4>Open now</h4>}
-                            {!isOpen(choice.hours) && <h4>Closed</h4>}
-                            <p>{choice.hours}</p>
+                        <li className="choices--listitem" id={choice.restaurantId} choiceZip={choice.zipCode}>
+                            <h3 className="choices--name">{choice.restaurantName}</h3>
+                            {choice.thumbnailUrl && <img  className="choices--image" src={choice.thumbnailUrl} Alt="Restaurant view"/>}
+                            <h4 className="choices--address">{choice.address}</h4>
+                            {isOpen(choice.hours) && <h4 className="choices--open">Open now</h4>}
+                            {!isOpen(choice.hours) && <h4 className="choices--closed">Closed</h4>}
+                            <p className="choices--hours">{choice.hours}</p>
                             {choice.phoneNumber &&
                                 <>
-                                    <h3>{choice.phoneNumber}</h3>
-                                    <button>Call to order</button>
+                                    <h3 className="choices--phone">{choice.phoneNumber}</h3>
+                                    <button className="choices--call">Call to order</button>
                                 </>
                             }
-                            <h4>{choice.type}</h4>
-                            {!isSelected(choice.restaurantId) && <button id={choice.restaurantId} onClick={addRestaurantToSelections}>Add to invitation</button>}
-                            {isSelected(choice.restaurantId) && <button id={choice.restaurantId} onClick={removeRestaurantFromSelections}>Remove from invitation</button>}
-                            <hr/>
+                            <h4 className="choices--type">{choice.type}</h4>
+                            {!isSelected(choice.restaurantId) && <button className="choices--add" id={choice.restaurantId} onClick={addRestaurantToSelections}>Add to invitation</button>}
+                            {isSelected(choice.restaurantId) && <button className="choices--remove" id={choice.restaurantId} onClick={removeRestaurantFromSelections}>Remove from invitation</button>}
                         </li>
                     ))}
                 </ul>
@@ -163,10 +162,10 @@ export default function Home(props) {
 
     function listGuests() {
         return (
-            <ul>
+            <ul className="invite--list">
                 {invitedGuests.map((guest) => (
-                    <li>
-                        {guest}<button onClick={() => removeGuest(guest)} >Remove</button>
+                    <li className="invite--listitem">
+                        {guest}<button  className="invite--remove"onClick={() => removeGuest(guest)} >Remove</button>
                     </li>
                 ))}
             </ul>
@@ -275,48 +274,50 @@ export default function Home(props) {
     return(
         <div>
 
-            {mode==="home" && <div>
-                <button onClick={getLocation}>Send request to go out</button>
-                <button onClick={reviewRequests}>Review requests</button>
+            {mode==="home" && <div className="home--container">
+                <button onClick={getLocation} className="home--send">Send request to go out</button>
+                <button onClick={reviewRequests} className="home--review">Review requests</button>
             </div>}
 
-            {mode==="locate" && <div>
-                <form onSubmit={submitLocation}>
-                    <input type="textbox" placeholder="Enter ZIP Code" value={zip} onChange={enterZip} />
-                    <h4>-OR-</h4>
-                    <input type="textbox" placeholder="City" value={city} onChange={enterCity} />
-                    <input type="textbox" placeholder="State" value={state} onChange={enterState} />
-                    <input type="submit" value="Submit" />
+            {mode==="locate" && <div className="locate--container">
+                <h3 className="locate--title" >Find restaurants</h3>
+                <form className="locate--form" onSubmit={submitLocation}>
+                    <input className="locate--zip" type="textbox" placeholder="Enter ZIP Code" value={zip} onChange={enterZip} />
+                    <h4 className="locate--or">-OR-</h4>
+                    <input className="locate--city" type="textbox" placeholder="City" value={city} onChange={enterCity} />
+                    <input className="locate--state" type="textbox" placeholder="State (two-letter abbrev.)" value={state} onChange={enterState} />
+                    <br/>
+                    <input className="locate--submit" type="submit" value="Submit" />
                 </form>
             </div>}
 
-            {mode==="choices" && <div>
-                {selections.length > 0 && <button onClick={generateInvitation}>Create invitation with selected restaurants</button>}
+            {mode==="choices" && <div className="choices--container">
+                {selections.length > 0 && <button className="choices--generate" onClick={generateInvitation}>Create invitation with selected restaurants</button>}
                 {showCandidates()}
             </div>}
 
-            {mode==="invite" && <div>
-                <h3>Invite Diners!</h3>
-                <form onSubmit={submitInvite}>
-                    <input type="email" placeholder="Add a guest (email)" value={searchEmail} onChange={updateSearchEmail}/>
-                    <button type="button" id={searchEmail} onClick={addGuest}>Add</button>
+            {mode==="invite" && <div className="invite--container">
+                <h3 className="invite--title">Invite Diners</h3>
+                <form  className="invite--form" onSubmit={submitInvite}>
+                    <input className="invite--email" type="email" placeholder="Add a guest (email)" value={searchEmail} onChange={updateSearchEmail}/>
+                    <button className="invite--add" type="button" id={searchEmail} onClick={addGuest}>Add</button>
                     <br/>
                     {listGuests()}
                     <hr/>
-                    <h4>Choose a deadline for a decision</h4>
-                    <input type="datetime-local" id="decisiontime" name="decisiontime" onChange={updateDate}/>
+                    <h4 className="invite--deadline">Choose a deadline for a decision</h4>
+                    <input className="invite--date" type="datetime-local" id="decisiontime" name="decisiontime" onChange={updateDate}/>
                     <hr/>
-                    <input type="submit" value="Submit" />
+                    <input className="invite--submit" type="submit" value="Submit" />
                 </form>
             </div>}
 
-            {mode==="link" && <div>
-                <h2>Invitation saved!  Here is the link your guests can visit to vote on your restaurant selections:</h2>
-                <h3>LINK TO REQUEST</h3>
+            {mode==="link" && <div className="link--container">
+                <h2 className="link--title">Invitation saved!  Here is the link your guests can visit to vote on your restaurant selections:</h2>
+                <h3 className="link--link">LINK TO REQUEST</h3>
             </div>}
 
-            {mode==="review" && <div>
-                <h2>Your Requests</h2>
+            {mode==="review" && <div className="review--container">
+                <h2 className="review--title">Your Requests</h2>
                 <hr/>
                 {listRequests()}
             </div>}

@@ -1,3 +1,38 @@
+.main--container {
+    background-color:#9073e0;
+    display: flex;
+    flex-direction: column;
+}
+
+.main--navbar {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+}
+
+.main--logo {
+    max-height: 60px;
+}
+
+.main--home {
+    font-family:'Oswald';
+    font-style:normal;
+    font-size: 24px;
+    text-decoration: none;
+    color: white;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.main--logout {
+    font-family:'Oswald';
+    font-style:normal;
+    font-size: 24px;
+    text-decoration: none;
+    color: white;
+    margin-right: 50px;
+}
+
 .login--body {
     background-image:url('./Background.png');
     background-size:cover;
@@ -5,22 +40,28 @@
     font-family:'Oswald';
     font-style:normal;
     margin-top: 50px;
-    display: grid;
-    grid-template-columns: max-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .login--container {
-    align-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
     height: 600px;
-    width: 800px;
+    width: 90vw;
     background: #F6D2FC;
-    margin-left: 350px;
+    padding: 100px;
+    margin: 20px;
+
 }
 
 .login--title {
     text-align: center;
     padding-bottom: 20px;
+    padding-top: 20px;
     font-style: normal;
     font-size:70px;
     line-height: 48px;
@@ -28,17 +69,13 @@
   }
 
 .login--email {
-    justify-content: center;
-    padding-right: 50px;
-    padding-bottom: 20px;
+    width: 400px;
     margin-bottom: 30px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .login--password {
-    justify-content: center;
-    padding-right: 50px;
-    padding-bottom: 20px;
+    width: 400px;
     margin-bottom: 30px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
@@ -55,22 +92,16 @@
     font-size: 20px;
     font-weight: bold;
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
-    margin-bottom: 90px;
+    margin-bottom: 30px;
 }
 
 .login--usernameText {
-    margin-right: 183px;
-    width: 164px;
-    height: 19px;
     font-size: 15px;
     line-height: 22px;
     color: #000000;
 }
 
 .login--passwordText {
-    margin-right: 165px;
-    width: 164px;
-    height: 19px;
     font-size: 15px;
     line-height: 22px;
     color: #000000;
@@ -78,14 +109,21 @@
 
 .login--register {
     font-family:'Times New Roman', Times, serif;
-    text-shadow: 2px 2px 3px #000000;
     text-decoration: none;
     font-display:inherit;
-    margin-right: 150px;
+    border: none;
+    background:rgb(95, 8, 129);
+    padding: 5px;
+    color:#decdff;
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .register--page {
     box-sizing: border-box
+}
+
+.register--title {
+    color: #decdff;
 }
 
 .register--input {
@@ -102,16 +140,10 @@
     outline: none;
 }
 
-.register--rule {
-    border: 1px solid #f1f1f1;
-    margin-bottom: 25px;
-}
-
 .register--submit {
     background-color: #04AA6D;
     color: white;
     padding: 14px 20px;
-    margin: 8px 0;
     border: none;
     cursor: pointer;
     width: 100%;
@@ -129,4 +161,224 @@
     background-color: #f44336;
     float: left;
     width: 50%;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+}
+
+.home--container {
+    display: flex;
+    flex-direction: column;
+}
+
+.home--send {
+    width: 400px;
+    align-self: center;
+    margin: 20px;
+    margin-bottom: 0px;
+}
+
+.home--review {
+    width: 400px;
+    align-self: center;
+    margin: 20px;
+}
+
+.locate--container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.locate--title {
+    color:#decdff;
+    font-size: 40px;
+}
+
+.locate--form {
+    text-align: center;
+}
+
+.locate--zip {
+    
+}
+
+.locate--or {
+    text-align: center;
+    color:#decdff;
+    margin: 20px;
+}
+
+.locate--city {
+    margin: 5px;
+}
+
+.locate--state {
+    margin: 5px;
+}
+
+.locate--submit {
+    margin: 10px;
+}
+
+.choices--container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.choices--generate {
+    align-self: center;
+    width: 400px;
+    height: 80px;
+    margin-bottom: 20px;
+}
+
+.choices--list {
+    background:#decdff;
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+}
+
+.choices--listitem {
+    list-style: none;
+    margin: 30px;
+    margin-left: 0px;
+    background-color:#e4c3f1;
+    border: solid 1px #6b3377;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.choices--name {
+    margin: 10px;
+}
+
+.choices--image {
+    width: 400px;
+}
+
+.choices--address {
+    width: 380px;
+}
+
+.choices--open {
+    background-color:#75dbb6;
+    padding: 10px;
+}
+
+.choices--closed {
+    background-color:#db7c75;
+    padding: 10px;
+}
+
+.choices--hours {
+    width: 400px;
+}
+
+.choices--phone {
+    
+}
+
+.choices--call {
+    margin-bottom: 10px;
+}
+
+.choices--type {
+    color:#6b3377;
+}
+
+.choices--add {
+    margin: 20px;
+}
+
+.choices--remove {
+    margin: 20px;
+}
+
+.invite--container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color:#decdff;
+}
+
+.invite--title {
+    margin: 10px;
+}
+
+.invite--form {
+    background-color:#AD78F0;
+    padding: 40px;
+    padding-bottom: 20px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.invite--email {
+    width: 400px;
+}
+
+.invite--add {
+    
+}
+
+.invite--deadline {
+    text-align: center;
+}
+
+.invite--date {
+    
+}
+
+.invite--submit {
+    
+}
+
+.invite--list {
+    list-style: none;
+    text-align: right;
+    margin-top: 5px;
+}
+
+.invite--listitem {
+    margin-bottom: 5px;
+    background-color:#e4c3f1;
+    border: solid 2px black;
+}
+
+.invite--remove {
+    margin-left: 10px;
+}
+
+.link--container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.link--title {
+    color:#e4c3f1;
+}
+
+.link--link {
+    color:#decdff;
+    background-color:#6b3377;
+    width: 600px;
+    margin: 10px;
+    margin-bottom: 20px;
+}
+
+.review--container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.review--title {
+    color:#e4c3f1;
 }

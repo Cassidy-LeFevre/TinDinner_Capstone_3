@@ -7,6 +7,7 @@ import {addToken, deleteUser} from '../../Redux/actionCreators'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import './tindinner.css'
+import tindinnerlogo from './tindinnerlogo.png'
 
 const mapStateToProps = state => {
     return {
@@ -32,16 +33,21 @@ class Main extends Component {
 
     render(){
         return(
-            <div>
+            <div className="main--container">
                 {this.props.token.token !== undefined ?
-                        <div>
-                            <Link to='/home'>Home | </Link>
-                            <Link to='/login' onClick={this.handleLogout}>logout</Link> 
+                        <div className="main--navbar">
+                            <div className="main--logohome">
+                                <img src={tindinnerlogo} alt="logo" className="main--logo" />
+                                <Link to='/home' className="main--home">HOME</Link>
+                            </div>
+                            <Link to='/login'  className="main--logout" onClick={this.handleLogout}>LOGOUT</Link> 
                             <Redirect to='/home'/>
 
                         </div>  
-                    : 
-                        <Link to='/login'>Home | </Link>
+                    :   <div>
+                            <img src={tindinnerlogo} alt="logo" className="main--logo" />
+                            <Link to='/login' className="main--home">HOME</Link>
+                        </div>
                 }
                 <Switch>
                     <Route path='/login' component={() => <Login/>}/>
