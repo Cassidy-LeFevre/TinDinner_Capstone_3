@@ -38,8 +38,10 @@ public class RequestService {
 
         Set<User> invitedUsers = new HashSet<User>();
 
-        for(long inviteeId : requestDTO.getInviteeIds()){
-            invitedUsers.add(userRepository.findByUserId(inviteeId));
+        for(String inviteeEmail : requestDTO.getInviteeEmails()){
+            if(userRepository.findByUsername(inviteeEmail) != null) {
+                invitedUsers.add(userRepository.findByUsername(inviteeEmail));
+            }
         }
 
         Set<Restaurant> restaurants = new HashSet<Restaurant>();

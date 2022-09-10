@@ -40,5 +40,10 @@ public class RequestController {
         return requestService.saveRequest(requestDTO) ;
     }
 
+    @GetMapping("/request-by-creator/{id}")
+    List<Request> findByCreatorId(@PathVariable long id){
+        return requestRepository.findByCreatorId(id);
+    }
+
 
 }

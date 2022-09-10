@@ -16,19 +16,40 @@ public class RequestDTO {
     @JsonProperty("restaurantIds")
     int[] restaurantIds;
 
-    @JsonProperty("inviteeIds")
-    long[] inviteeIds;
+//    @JsonProperty("inviteeIds")
+//    long[] inviteeIds;
+
+    @JsonProperty("inviteeEmails")
+    String[] inviteeEmails;
 
     @JsonProperty("decisionDateTime")
     String decisionDateTime;
+
+    public int getRequestId() {
+        return requestId;
+    }
+
+    public void setRequestId(int requestId) {
+        this.requestId = requestId;
+    }
+
+    public String[] getInviteeEmails() {
+        return inviteeEmails;
+    }
+
+    public void setInviteeEmails(String[] inviteeEmails) {
+        this.inviteeEmails = inviteeEmails;
+    }
+
+
 
     public long getUserId() {
         return userId;
     }
 
-    public long[] getInviteeIds() {
-        return inviteeIds;
-    }
+//    public long[] getInviteeIds() {
+//        return inviteeIds;
+//    }
 
     public int[] getRestaurantIds() {
         return restaurantIds;
@@ -42,9 +63,9 @@ public class RequestDTO {
         this.decisionDateTime = decisionDateTime;
     }
 
-    public void setInviteeIds(long[] inviteeIds) {
-        this.inviteeIds = inviteeIds;
-    }
+//    public void setInviteeIds(long[] inviteeIds) {
+//        this.inviteeIds = inviteeIds;
+//    }
 
     public void setRestaurantIds(int[] restaurantIds) {
         this.restaurantIds = restaurantIds;
