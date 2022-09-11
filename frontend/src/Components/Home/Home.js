@@ -2,11 +2,11 @@ import React from 'react'
 import { useSelector } from "react-redux";import axios from 'axios'
 import { baseUrl } from '../../Shared/baseUrl'
 import isOpen from './isOpen';
+import isExpired from './isExpired';
 
 export default function Home(props) {
 
     const loadedUser = useSelector(state => state.user)
-    // loadedUser.id = hostId
 
     // React.useEffect(() => {         // THIS IS ONLY HERE FOR TESTING
     //     console.log("USE EFFECT USED")
@@ -227,7 +227,7 @@ export default function Home(props) {
             return
         }
         const decisionDateTime = decisionDate.replace("T", " ") + ":00"
-        //THE FOLLOWING RESULTS IN AN ERROR 400:
+        //THE FOLLOWING RESULTS IN AN ERROR 500:
         axios.post(baseUrl + '/send-request',
             {
                 headers: {
@@ -258,17 +258,72 @@ export default function Home(props) {
         setMode("review")
     }
 
-    function listRequests() {
-        // fetch all requests by user first
+    function listRequests() { // check this once the DB has restaurants and guests in the table
+        axios.get(baseUrl + "/request-by-creator/" + loadedUser.id)
+        .then(function (response){
+            let pendingInvitations = [];
+            let expiredInvitations = [];
+            for(let i = 0; i < response.data.length; i++) {
+                if(isExpired(response.data[i].decisionDateTime)) expiredInvitations.push(response.data[i])
+                else pendingInvitations.push(response.data[i])
+            }
+            return (
+                <div>
+                    <h3>Completed Requests</h3>
+                    <ul>
+                        {expiredInvitations.map((inv) => (
+                            <li>
+                                <h4>{inv.decisionDateTime}</h4>
+                                {displayInvitedGuests(inv)}
+                                {displayResults(inv)}
+                            </li>
+                        ))}
+                    </ul>
+                    <h3>Pending Requests</h3>
+                    <ul>
+                        {pendingInvitations.map((inv) => (
+                            <li>
+                                <h4>{inv.decisionDateTime}</h4>
+                                {displayInvitedGuests(inv)}
+                                {displayResults(inv)}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )
+        })
+    }
+
+    function displayInvitedGuests(req) {
         return (
-            <ul>
-                {invitedGuests.map((guest) => ( // change to map over requests returned
-                    <li>
-                        {guest}<button onClick={() => removeGuest(guest)} >Remove</button>
-                    </li>
-                ))}
-            </ul>
+            <div>
+                <h4>Guests Invited</h4>
+                <ul>
+                    {req.invitedUsers.length === 0 && <p>There are no guests to display.</p>}
+                    {req.invitedUsers.map((invGuest) => (
+                        <li>{invGuest}</li>
+                    ))}
+                </ul>
+            </div>
         )
+    }
+
+    function displayResults(req) {
+        return (
+            <div>
+                <h4>Restaurants Preferred</h4>
+                <ul>
+                    {req.restaurantsByRequest.length === 0 && <p>There are no restaurants to display.</p>}
+                    {req.restaurantsByRequest.map((finalist) => (
+                        <li>Restaurant ID: {finalist}</li>
+                    ))}
+                </ul>
+            </div>
+        )
+    }
+
+    function returnHome() {
+        setMode("home")
     }
 
     return(
@@ -320,6 +375,8 @@ export default function Home(props) {
                 <h2 className="review--title">Your Requests</h2>
                 <hr/>
                 {listRequests()}
+                <hr/>
+                <button className="review--home" onClick={returnHome}>Done</button>
             </div>}
 
         </div>

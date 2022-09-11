@@ -440,3 +440,25 @@
 .review--title {
     color:#e4c3f1;
 }
+
+.review--home {
+    margin-bottom: 20px;
+}
+
+.guest--container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.guest--creator {
+    color:#f1bff8;
+}
+
+.guest--host {
+    color:#e0b3f5;
+}
+
+.guest--title {
+    color:#decdff;
+}
