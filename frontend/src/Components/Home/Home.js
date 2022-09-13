@@ -224,27 +224,21 @@ export default function Home(props) {
             return
         }
         const decisionDateTime = decisionDate.replace("T", " ") + ":00"
-        axios.post(baseUrl + '/send-request',
-            {
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                data: {
-                    userId: loadedUser.id,
-                    restaurantIds: selections,
-                    inviteeEmails: invitedGuests,
-                    decisionDateTime: decisionDateTime
-                }
-            }
-        )
+        const dataObject = {
+            userId: loadedUser.id,
+            restaurantIds: selections,
+            inviteeEmails: invitedGuests,
+            decisionDateTime: decisionDateTime
+        }
+        axios.post(baseUrl + '/send-request', {data: dataObject})
         .then(function (response){
             if(response.data.length === 0) {
                 alert("There was a problem while saving the invitation!!!")
                 return
             }
             console.log(response.data)
-            // setInvitationId(response.data) // finisih the .path
-            setMode("choices")
+            // setInvitationId(response.data) // finish the .path
+            // setMode("choices")
         })
         // clearState()
         // setMode("link")
