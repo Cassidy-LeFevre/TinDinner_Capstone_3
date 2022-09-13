@@ -19,6 +19,10 @@ public class RestaurantController {
         return restaurantRepository.findByZipCode(zipCode);
     }
 
+    @GetMapping("/restaurants-byId/{id}")
+    Restaurant findById(@PathVariable int id){
+        return restaurantRepository.findByRestaurantId(id);
+    }
 
 
     @GetMapping("/restaurants/by-city")
