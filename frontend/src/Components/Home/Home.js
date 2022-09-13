@@ -224,7 +224,6 @@ export default function Home(props) {
             return
         }
         const decisionDateTime = decisionDate.replace("T", " ") + ":00"
-        //THE FOLLOWING RESULTS IN AN ERROR 500:
         axios.post(baseUrl + '/send-request',
             {
                 headers: {
@@ -232,8 +231,8 @@ export default function Home(props) {
                 },
                 data: {
                     userId: loadedUser.id,
-                    inviteeEmails: invitedGuests,
                     restaurantIds: selections,
+                    inviteeEmails: invitedGuests,
                     decisionDateTime: decisionDateTime
                 }
             }
@@ -243,12 +242,12 @@ export default function Home(props) {
                 alert("There was a problem while saving the invitation!!!")
                 return
             }
-            setInvitationId(response.data) // finisih the .path
-            console.log(response.data + " : " + invitationId) // take this out after testing
+            console.log(response.data)
+            // setInvitationId(response.data) // finisih the .path
             setMode("choices")
         })
-        clearState()
-        setMode("link")
+        // clearState()
+        // setMode("link")
     }
 
     function reviewRequests() {
