@@ -98,14 +98,14 @@ export default function Home(props) {
             alert("You can only select up to five restaurants per invitation!!!")
             return
         }
-        if(selections.length === 0) setSelections([choiceId])
+        if(selections.length === 0) setSelections([Number(choiceId)])
         else {
             for(let i = 0; i < selections.length; i++) {
                 if(selections[i] == choiceId) {
                     alert("This restaurant is already selected for this invitation!!!")
                     return
                 }
-                setSelections([...selections, choiceId])
+                setSelections([...selections, Number(choiceId)])
             }
         }
     }
@@ -189,22 +189,6 @@ export default function Home(props) {
         setInvitedGuests(workingGuests)
     }
 
-    function findUserIdByUsername(emailAddress) { // check fetch before implementing
-        // axios.get(baseUrl + "/find-user", emailAddress)
-        // .then(function (response){
-        //     console.log(response.data)
-        // })
-        return (Math.floor(Math.random() * 20) + 5000).toString()
-    }
-
-    function findUsernameByUserId(userNumber) { // check fetch before implementing
-        // axios.get(baseUrl + "/user/" + userNumber)
-        // .then(function (response){
-        //     console.log(response.data)
-        // })
-        return "test@this." + userNumber
-    }
-
     function updateSearchEmail(event) {
         setSearchEmail(event.target.value)
     }
@@ -230,25 +214,22 @@ export default function Home(props) {
             inviteeEmails: invitedGuests,
             decisionDateTime: decisionDateTime
         }
-        axios.post(baseUrl + '/send-request', {data: dataObject})
+        axios.post(baseUrl + '/send-request', dataObject)
         .then(function (response){
             if(response.data.length === 0) {
                 alert("There was a problem while saving the invitation!!!")
                 return
             }
-            console.log(response.data)
-            // setInvitationId(response.data) // finish the .path
-            // setMode("choices")
+            setInvitationId(response.data.requestId)
         })
-        // clearState()
-        // setMode("link")
+        setMode("link")
     }
 
     function reviewRequests() {
         setMode("review")
     }
 
-    function listRequests() { // check this once the DB has restaurants and guests in the table
+    function listRequests() { // this is not displaying anything yet ???
         axios.get(baseUrl + "/request-by-creator/" + loadedUser.id)
         .then(function (response){
             let pendingInvitations = [];
@@ -358,7 +339,7 @@ export default function Home(props) {
 
             {mode==="link" && <div className="link--container">
                 <h2 className="link--title">Invitation saved!  Here is the link your guests can visit to vote on your restaurant selections:</h2>
-                <h3 className="link--link">LINK TO REQUEST</h3>
+                <h3 className="link--link">{baseUrl + "/guest/" + invitationId}</h3>
             </div>}
 
             {mode==="review" && <div className="review--container">

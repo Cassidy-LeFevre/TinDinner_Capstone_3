@@ -30,7 +30,7 @@ export default function Guest(props) {
         })
     }
 
-    function discoverCandidates() { // INSERT [GET RESTAURANTS BY ID] AND ASSIGN TO choices BY ITERATNG THROUGH options (will construct a new array of objects)
+    function discoverCandidates() { // INSERT /restaurants-byId/{id} AND ASSIGN TO choices BY ITERATNG THROUGH options (will construct a new array of objects)
         // Add a field to each object - voted: "none" - set to either "up" or "down" in thumbs-up or thumbs-down selection
 
         // axios.get(baseUrl + "/request/" + props.invitationId)
