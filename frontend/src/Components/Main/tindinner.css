@@ -459,6 +459,58 @@
     color:#e0b3f5;
 }
 
+.guest--expired {
+    
+}
+
+.guest--unexpiredcontainer {
+    
+}
+
 .guest--title {
     color:#decdff;
+}
+
+.guest--candidates {
+
+}
+
+.candidates--list {
+    
+}
+
+.candidates--listitem {
+    
+}
+
+.guest--up {
+
+}
+
+.guest--down {
+    
+}
+
+.guest--upselected {
+
+}
+
+.guest--downselected {
+    
+}
+
+.guest--upunselected {
+
+}
+
+.guest--downunselected {
+    
+}
+
+.guest--submit {
+
+}
+
+.guest--submitted {
+
 }

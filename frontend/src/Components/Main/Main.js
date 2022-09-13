@@ -33,6 +33,9 @@ class Main extends Component {
     }
 
     render(){
+        const GuestLogin = ({match}) => {
+            return <Guest invitationId={match.params.invitation}/>
+        }
         return(
             <div className="main--container">
                 {this.props.token.token !== undefined ?
@@ -54,7 +57,7 @@ class Main extends Component {
                     <Route path='/login' component={() => <Login/>}/>
                     <Route path='/register'component={() => <Register/>}/>
                     <Route path='/home' component={this.props.token.token !== undefined ? () => <Home/> : null}/>
-                    <Route path='/guest' component={() => <Guest/>}/>
+                    <Route path='/guest/:invitation' component={GuestLogin}/>
                     <Redirect to='/login'/>
                 </Switch>
             </div>

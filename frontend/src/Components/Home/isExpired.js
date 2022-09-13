@@ -28,16 +28,16 @@ export default function isExpired(exp) {
     const expirationHour = expirationDateString.substring(11, 13)
     const expirationMinute = expirationDateString.substring(14, 16)
     const expirationSecond = expirationDateString.substring(17, 19)
-    if(currentYear < expirationYear) return false
-    if(currentYear > expirationYear) return true
-    if(currentMonth < expirationMonth) return false
-    if(currentMonth > expirationMonth) return true
-    if(currentDay < expirationDay) return false
-    if(currentDay > expirationDay) return true
-    if(currentHour < expirationHour) return false
-    if(currentHour > expirationHour) return true
-    if(currentMinute < expirationMinute) return false
-    if(currentMinute > expirationMinute) return true
-    if(currentSecond < expirationSecond) return false
+    if(Number(currentYear) < Number(expirationYear)) return false
+    if(Number(currentYear) > Number(expirationYear)) return true
+    if(Number(currentMonth) < Number(expirationMonth)) return false
+    if(Number(currentMonth) > Number(expirationMonth)) return true
+    if(Number(currentDay) < Number(expirationDay)) return false
+    if(Number(currentDay) > Number(expirationDay)) return true
+    if(Number(currentHour) < Number(expirationHour)) return false
+    if(Number(currentHour) > Number(expirationHour)) return true
+    if(Number(currentMinute) < Number(expirationMinute)) return false
+    if(Number(currentMinute) > Number(expirationMinute)) return true
+    if(Number(currentSecond) < Number(expirationSecond)) return false
     return true
 }

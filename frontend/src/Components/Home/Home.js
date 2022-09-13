@@ -1,5 +1,6 @@
 import React from 'react'
-import { useSelector } from "react-redux";import axios from 'axios'
+import { useSelector } from "react-redux";
+import axios from 'axios'
 import { baseUrl } from '../../Shared/baseUrl'
 import isOpen from './isOpen';
 import isExpired from './isExpired';
@@ -7,10 +8,6 @@ import isExpired from './isExpired';
 export default function Home(props) {
 
     const loadedUser = useSelector(state => state.user)
-
-    // React.useEffect(() => {         // THIS IS ONLY HERE FOR TESTING
-    //     console.log("USE EFFECT USED")
-    // }, [invitedGuests])
 
     const [mode, setMode] = React.useState("home")
 
@@ -235,7 +232,7 @@ export default function Home(props) {
                 },
                 data: {
                     userId: loadedUser.id,
-                    inviteeIds: invitedGuests,
+                    inviteeEmails: invitedGuests,
                     restaurantIds: selections,
                     decisionDateTime: decisionDateTime
                 }
