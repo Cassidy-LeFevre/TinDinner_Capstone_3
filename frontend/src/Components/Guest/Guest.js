@@ -22,23 +22,22 @@ export default function Guest(props) {
             setHost(response.data.creator.username)
             if(isExpired(response.data.decisionDateTime)) setExpired(true)
             setOptions(response.data.restaurantsByRequest)
-
-            // DUMMY DATA
-            setOptions([2001, 2002])
-            // END DUMMY DATA
-
         })
     }
 
-    function discoverCandidates() { // INSERT /restaurants-byId/{id} AND ASSIGN TO choices BY ITERATNG THROUGH options (will construct a new array of objects)
-        // Add a field to each object - voted: "none" - set to either "up" or "down" in thumbs-up or thumbs-down selection
-
-        // axios.get(baseUrl + "/request/" + props.invitationId)
-        // .then(function (response){
-        //     setChoices(response.data)
-        //
-        //     displayCandidates()
-        //  })
+    function discoverCandidates() {
+        axios.get(baseUrl + "/restaurants-byId/" + props.invitationId)
+        .then(function (response){
+            console.log(response) // nothing in .data yet
+            // if(response.data.restaurantsByRequest.length === 0) return
+            // let buildChoices = []
+            // for(let i = 0; i < response.data.restaurantsByRequest.length; i++) {
+            //     response.data.restaurantsByRequest[i].voted = "none"
+            //     buildChoices.push(response.data.restaurantsByRequest[i])
+            // }
+            // setChoices(buildChoices)
+            // displayCandidates()
+         })
     }
 
     function thumbsUp(event) {

@@ -4,6 +4,7 @@ import axios from 'axios'
 import { baseUrl } from '../../Shared/baseUrl'
 import isOpen from './isOpen';
 import isExpired from './isExpired';
+import beautifyDate from './beautifyDate';
 
 export default function Home(props) {
 
@@ -23,6 +24,8 @@ export default function Home(props) {
     const [decisionDate, setDecisionDate] = React.useState("")
 
     const [invitationId, setInvitationId] = React.useState("")
+    const [pending, setPending] = React.useState([])
+    const [expired, setExpired] = React.useState([])
 
     function clearState() {
         setZip("")
@@ -34,6 +37,8 @@ export default function Home(props) {
         setInvitedGuests([])
         setDecisionDate("")
         setInvitationId("")
+        setPending([])
+        setExpired([])
     }
 
     function getLocation() {
@@ -227,9 +232,10 @@ export default function Home(props) {
 
     function reviewRequests() {
         setMode("review")
+        getRequests()
     }
 
-    function listRequests() { // this is not displaying anything yet ???
+    function getRequests() { // Finished once the DB returns usernames in the request
         axios.get(baseUrl + "/request-by-creator/" + loadedUser.id)
         .then(function (response){
             let pendingInvitations = [];
@@ -238,23 +244,31 @@ export default function Home(props) {
                 if(isExpired(response.data[i].decisionDateTime)) expiredInvitations.push(response.data[i])
                 else pendingInvitations.push(response.data[i])
             }
+            setPending(pendingInvitations)
+            setExpired(expiredInvitations)
+        })
+    }
+
+    function listRequests() {
             return (
-                <div>
-                    <h3>Completed Requests</h3>
-                    <ul>
-                        {expiredInvitations.map((inv) => (
-                            <li>
-                                <h4>{inv.decisionDateTime}</h4>
+                <div className="finalist--container">
+                    <hr/>
+                    <h3 className="finalist--completed">Completed Requests</h3>
+                    <ul className="finalist--completedlist">
+                        {expired.map((inv) => (
+                            <li className="finalist--completedlistitem">
+                                <h4 className="finalist--expireddate">{beautifyDate(inv.decisionDateTime)}</h4>
                                 {displayInvitedGuests(inv)}
                                 {displayResults(inv)}
                             </li>
                         ))}
                     </ul>
-                    <h3>Pending Requests</h3>
-                    <ul>
-                        {pendingInvitations.map((inv) => (
-                            <li>
-                                <h4>{inv.decisionDateTime}</h4>
+                    <hr/>
+                    <h3 className="finalist--pending">Pending Requests</h3>
+                    <ul className="finalist--pendinglist">
+                        {pending.map((inv) => (
+                            <li className="finalist--pendinglistitem">
+                                <h4 className="finalist--pendingdate">{beautifyDate(inv.decisionDateTime)}</h4>
                                 {displayInvitedGuests(inv)}
                                 {displayResults(inv)}
                             </li>
@@ -262,17 +276,16 @@ export default function Home(props) {
                     </ul>
                 </div>
             )
-        })
     }
 
     function displayInvitedGuests(req) {
         return (
             <div>
-                <h4>Guests Invited</h4>
+                <h4 className="invitedguests--title">Guests Invited</h4>
                 <ul>
-                    {req.invitedUsers.length === 0 && <p>There are no guests to display.</p>}
+                    {req.invitedUsers.length === 0 && <p className="invitedguests--noguests">There are no guests to display.</p>}
                     {req.invitedUsers.map((invGuest) => (
-                        <li>{invGuest}</li>
+                        <li className="invitedguests--name">{invGuest}</li>
                     ))}
                 </ul>
             </div>
@@ -280,14 +293,30 @@ export default function Home(props) {
     }
 
     function displayResults(req) {
+        console.log(req.restaurantsByRequest)
         return (
             <div>
-                <h4>Restaurants Preferred</h4>
+                <h4 className="preferred--title">Restaurants Preferred</h4>
                 <ul>
-                    {req.restaurantsByRequest.length === 0 && <p>There are no restaurants to display.</p>}
+                    {req.restaurantsByRequest.length === 0 && <p className="preferred--none">There are no restaurants to display.</p>}
                     {req.restaurantsByRequest.map((finalist) => (
-                        <li>Restaurant ID: {finalist}</li>
+                        <li className="choices--listitem" id={finalist.restaurantId}>
+                            <h3 className="choices--name">{finalist.restaurantName}</h3>
+                            {finalist.thumbnailUrl && <img  className="choices--image" src={finalist.thumbnailUrl} Alt="Restaurant view"/>}
+                            <h4 className="choices--address">{finalist.address}</h4>
+                            {isOpen(finalist.hours) && <h4 className="choices--open">Open now</h4>}
+                            {!isOpen(finalist.hours) && <h4 className="choices--closed">Closed</h4>}
+                            <p className="choices--hours">{finalist.hours}</p>
+                            {finalist.phoneNumber &&
+                                <>
+                                    <h3 className="choices--phone">{finalist.phoneNumber}</h3>
+                                    <button className="choices--call">Call to order</button>
+                                </>
+                            }
+                            <h4 className="choices--type">{finalist.type}</h4>
+                        </li>
                     ))}
+                    <hr/>
                 </ul>
             </div>
         )
