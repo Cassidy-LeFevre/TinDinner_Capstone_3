@@ -238,6 +238,7 @@ export default function Home(props) {
     function getRequests() { // Finished once the DB returns usernames in the request
         axios.get(baseUrl + "/request-by-creator/" + loadedUser.id)
         .then(function (response){
+            console.log(response)
             let pendingInvitations = [];
             let expiredInvitations = [];
             for(let i = 0; i < response.data.length; i++) {
@@ -293,7 +294,6 @@ export default function Home(props) {
     }
 
     function displayResults(req) {
-        console.log(req.restaurantsByRequest)
         return (
             <div>
                 <h4 className="preferred--title">Restaurants Preferred</h4>

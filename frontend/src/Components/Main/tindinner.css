@@ -530,16 +530,28 @@
 
 }
 
-.candidates--list {
+.guest--empty {
+
+}
+
+.guest--list {
     
 }
 
-.candidates--listitem {
-    
+.guest--listitem {
+    width: 320px;
+    list-style: none;
+    margin: 30px;
+    margin-left: 0px;
+    background-color:#e4c3f1;
+    border: solid 1px #6b3377;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .guest--up {
-
+    
 }
 
 .guest--down {
@@ -547,19 +559,19 @@
 }
 
 .guest--upselected {
-
+    background-color: #39d69d;
 }
 
 .guest--downselected {
-    
+    background-color: #f78080;
 }
 
 .guest--upunselected {
-
+    opacity: 0.5;
 }
 
 .guest--downunselected {
-    
+    opacity: 0.5;
 }
 
 .guest--submit {
