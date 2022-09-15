@@ -16,7 +16,10 @@ public class Request {
     @Id
     int requestId;
 
-
+    /*
+    FOR SAKE OF EASE, I did not convert over to participant for this, because
+    those who create requests must be users.
+     */
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id",nullable = false)
@@ -26,10 +29,10 @@ public class Request {
     @ManyToMany(fetch = FetchType.EAGER)
     @JsonManagedReference
     @JoinTable(
-            name = "request_user",
+            name = "participant_request",
             joinColumns = @JoinColumn(name = "request_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
-    Set<User> invitedUsers;
+            inverseJoinColumns = @JoinColumn(name = "participantId"))
+    Set<Participant> invitedParticipants;
 
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -45,9 +48,9 @@ public class Request {
 
     public Request(){};
 
-    public Request(User creator, Set<User> invitedUsers, Set<Restaurant> restaurantsByRequest, Timestamp decisionDateTime){
+    public Request(User creator, Set<Participant> invitedParticipants, Set<Restaurant> restaurantsByRequest, Timestamp decisionDateTime) {
         this.creator = creator;
-        this.invitedUsers = invitedUsers;
+        this.invitedParticipants = invitedParticipants;
         this.restaurantsByRequest = restaurantsByRequest;
         this.decisionDateTime = decisionDateTime;
     }

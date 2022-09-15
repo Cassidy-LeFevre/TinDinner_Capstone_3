@@ -1,14 +1,19 @@
 BEGIN TRANSACTION;
 
 DROP TABLE IF EXISTS users, request, restaurant,
-request_user, request_restaurant;
-DROP SEQUENCE IF EXISTS seq_user_id, seq_request_id, seq_restaurant_id;
+request_user, request_restaurant, participant;
+DROP SEQUENCE IF EXISTS seq_user_id, seq_request_id, seq_restaurant_id, seq_participant_id;
 
 CREATE SEQUENCE seq_user_id
   INCREMENT BY 1
   NO MAXVALUE
   NO MINVALUE
   CACHE 1;
+  
+CREATE SEQUENCE seq_participant_id
+  INCREMENT BY 1
+  NO MAXVALUE
+  START WITH 1000;
   
  CREATE SEQUENCE seq_restaurant_id
   INCREMENT BY 1
@@ -28,8 +33,14 @@ CREATE TABLE users (
 	CONSTRAINT PK_user PRIMARY KEY (user_id)
 );
 
+CREATE TABLE participant (
+	participant_id int DEFAULT nextval('seq_participant_id') NOT NULL,
+	username varchar(50) NOT NULL,
+	CONSTRAINT PK_participant PRIMARY KEY (participant_id)
+);
+
 CREATE TABLE request (
-	request_id int DEFAULT nextval('seq_request_id'),
+	request_id int DEFAULT nextval('seq_request_id') NOT NULL,
 	user_id int NOT NULL,
 	decision_date_time TIMESTAMP NOT NULL,
 	CONSTRAINT FK_request_creator_id FOREIGN KEY (user_id) REFERENCES users (user_id),
@@ -51,19 +62,18 @@ CREATE TABLE restaurant (
 
 CREATE TABLE request_restaurant(
 	restaurant_id int NOT NULL, 
-	request_id int NOT NULL, 
-	votes int DEFAULT '0',
+	request_id int NOT NULL,
 	CONSTRAINT FK_request_id FOREIGN KEY (request_id) REFERENCES request (request_id),
 	CONSTRAINT FK_restaurant_id FOREIGN KEY (restaurant_id) REFERENCES restaurant (restaurant_id)
 );
 
 
 
-CREATE TABLE request_user(
+CREATE TABLE participant_request(
 	request_id int NOT NULL,
-	user_id int NOT NULL,
+	participant_id int NOT NULL,
 	CONSTRAINT FK_request_id FOREIGN KEY (request_id) REFERENCES request (request_id),
-	CONSTRAINT FK_user_id FOREIGN KEY (user_id) REFERENCES users (user_id)
+	CONSTRAINT FK_participant_id FOREIGN KEY (participant_id) REFERENCES participant (participant_id)
 );
 
 INSERT INTO users (username,password_hash,role) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');

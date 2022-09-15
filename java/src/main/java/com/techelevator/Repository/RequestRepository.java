@@ -10,11 +10,11 @@ public interface RequestRepository extends JpaRepository<Request, Integer> {
 
     @Query(value =
             "SELECT * FROM request r " +
-            "JOIN request_user ru ON r.request_id = ru.request_id " +
-             "WHERE ru.user_id = :id",
+            "JOIN participant_request pr ON r.request_id = pr.request_id " +
+             "WHERE pr.participant_id = :participantId",
             nativeQuery = true
     )
-    List<Request> findByInviteeId(long id);
+    List<Request> findByInviteeId(int participantId);
 
 
     List<Request> findByCreatorId(long id);

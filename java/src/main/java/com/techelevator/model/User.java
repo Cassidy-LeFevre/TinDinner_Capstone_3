@@ -34,10 +34,6 @@ public class User {
    @JsonBackReference
    private Set<Request> requests;
 
-   @JsonBackReference
-   @ManyToMany(mappedBy = "invitedUsers")
-   Set<Request> userInvites;
-
 
    public User() { }
 
@@ -50,14 +46,6 @@ public class User {
 
    public Set<Request> getRequests() {
       return requests;
-   }
-
-   public Set<Request> getUserInvites() {
-      return userInvites;
-   }
-
-   public void setUserInvites(Set<Request> userInvites) {
-      this.userInvites = userInvites;
    }
 
    public void setRequests(Set<Request> requests) {
