@@ -1,7 +1,7 @@
 BEGIN TRANSACTION;
 
 DROP TABLE IF EXISTS users, request, restaurant,
-request_user, request_restaurant, participant;
+request_user, request_restaurant, participant, participant_request;
 DROP SEQUENCE IF EXISTS seq_user_id, seq_request_id, seq_restaurant_id, seq_participant_id;
 
 CREATE SEQUENCE seq_user_id
