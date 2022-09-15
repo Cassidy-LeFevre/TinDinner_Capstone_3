@@ -44,25 +44,19 @@ export default function Guest(props) {
         }
     }
 
-    function thumbsUp(event) { // Needs to refresh render
-        const choiceId = event.target.id
+    function handleRadio(event) {
         let choiceList = choices
         for(let i = 0; i < choiceList.length; i++) {
-            if(choiceList[i].restaurantId == choiceId) choiceList[i].voted = "up"
-        }
-        setChoices(choiceList)
-    }
-
-    function thumbsDown(event) { // Needs to refresh render
-        const choiceId = event.target.id
-        let choiceList = choices
-        for(let i = 0; i < choiceList.length; i++) {
-            if(choiceList[i].restaurantId == choiceId) choiceList[i].voted = "down"
+            if(choiceList[i].restaurantId == event.target.id) {
+                if(event.target.value == "thumbs-up") choiceList[i].voted = "up"
+                if(event.target.value == "thumbs-down") choiceList[i].voted = "down"
+            }
         }
         setChoices(choiceList)
     }
     
     function submitPreferences() {
+        console.log(choices)
         for(let i = 0; i < choices.length; i++) {
             if(choices[i].voted === "down") {
                 // axios.delete(baseUrl + "/delete/" + choices[i].restaurantId + props.invitationId) //adjust this after endpoint is settled
@@ -93,12 +87,10 @@ export default function Guest(props) {
                         }
                         <h4 className="choices--type">{choice.type}</h4>
                         <br/>
-                        {choice.voted == "none" && <button className="guest--up" id={choice.restaurantId} onClick={thumbsUp}>Thumbs-Up!</button>}
-                        {choice.voted == "none" && <button className="guest--down" id={choice.restaurantId} onClick={thumbsDown}>Thumbs-Down!</button>}
-                        {choice.voted == "up" && <button className="guest--upselected" id={choice.restaurantId} onClick={thumbsUp}>Thumbs-Up!</button>}
-                        {choice.voted == "up" && <button className="guest--downunselected" id={choice.restaurantId} onClick={thumbsDown}>Thumbs-Down!</button>}
-                        {choice.voted == "down" && <button className="guest--upunselected" id={choice.restaurantId} onClick={thumbsUp}>Thumbs-Up!</button>}
-                        {choice.voted == "down" && <button className="guest--downselected" id={choice.restaurantId} onClick={thumbsDown}>Thumbs-Down!</button>}
+                        <div className="guest--radio" onChange={handleRadio}>
+                            <input className="guest--up" type="radio" value="thumbs-up" name="vote" id={choice.restaurantId} />Thumbs-up!
+                            <input className="guest--down" type="radio" value="thumbs-down" name="vote" id={choice.restaurantId} />Thumbs-down!
+                        </div>
                     </li>
                 ))}
             </ul>

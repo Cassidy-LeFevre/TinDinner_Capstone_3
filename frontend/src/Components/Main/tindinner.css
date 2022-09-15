@@ -489,7 +489,7 @@
 }
 
 .invitedguests--name {
-
+    list-style: none;
 }
 
 .preferred--title {
@@ -550,28 +550,16 @@
     align-items: center;
 }
 
+.guest--radio {
+
+}
+
 .guest--up {
     
 }
 
 .guest--down {
     
-}
-
-.guest--upselected {
-    background-color: #39d69d;
-}
-
-.guest--downselected {
-    background-color: #f78080;
-}
-
-.guest--upunselected {
-    opacity: 0.5;
-}
-
-.guest--downunselected {
-    opacity: 0.5;
 }
 
 .guest--submit {

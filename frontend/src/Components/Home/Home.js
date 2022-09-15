@@ -235,7 +235,7 @@ export default function Home(props) {
         getRequests()
     }
 
-    function getRequests() { // Finished once the DB returns usernames in the request
+    function getRequests() {
         axios.get(baseUrl + "/request-by-creator/" + loadedUser.id)
         .then(function (response){
             console.log(response)
@@ -280,13 +280,14 @@ export default function Home(props) {
     }
 
     function displayInvitedGuests(req) {
+        console.log(req.invitedParticipants)
         return (
             <div>
                 <h4 className="invitedguests--title">Guests Invited</h4>
                 <ul>
-                    {req.invitedUsers.length === 0 && <p className="invitedguests--noguests">There are no guests to display.</p>}
-                    {req.invitedUsers.map((invGuest) => (
-                        <li className="invitedguests--name">{invGuest}</li>
+                    {req.invitedParticipants.length === 0 && <p className="invitedguests--noguests">There are no guests to display.</p>}
+                    {req.invitedParticipants.map((invGuest) => (
+                        <li className="invitedguests--name">{invGuest.username}</li>
                     ))}
                 </ul>
             </div>
