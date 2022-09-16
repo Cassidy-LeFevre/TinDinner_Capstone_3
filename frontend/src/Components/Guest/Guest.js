@@ -6,11 +6,15 @@ import isOpen from "../Home/isOpen";
 
 export default function Guest(props) {
 
+    const [requestId, setRequestId] = React.useState(0)
     const [host, setHost] = React.useState("")
+    const [hostId, setHostId] = React.useState(0)
     const [options, setOptions] = React.useState([])
+    const [expiration, setExpiration] = React.useState("")
     const [expired, setExpired] = React.useState(false)
     const [choices, setChoices] = React.useState([])
     const [submitted, setSubmitted] = React.useState(false)
+    const [guests, setGuests] = React.useState([])
 
     React.useEffect(() => {
         getInvitation()
@@ -29,8 +33,12 @@ export default function Guest(props) {
         axios.get(baseUrl + "/request/" + props.invitationId)
         .then(function (response){
             setHost(response.data.creator.username)
+            setHostId(response.data.creator.id)
             if(isExpired(response.data.decisionDateTime)) setExpired(true)
             setOptions(response.data.restaurantsByRequest)
+            setGuests(response.data.invitedParticipants)
+            setExpiration(response.data.decisionDateTime)
+            setRequestId(response.data.requestId)
         })
     }
 
@@ -56,16 +64,28 @@ export default function Guest(props) {
     }
     
     function submitPreferences() {
-        console.log(choices)
-        for(let i = 0; i < choices.length; i++) {
-            if(choices[i].voted === "down") {
-                // axios.delete(baseUrl + "/delete/" + choices[i].restaurantId + props.invitationId) //adjust this after endpoint is settled
-                // .then(function (response){
-                //     // catch errors, etc.
-                // })
-            }
+        let keepers = []
+        let invitees = []
+        for(let i = 0; i < choices.length; i++) if(choices[i].voted !== "down") keepers.push(choices[i].restaurantId)
+        for(let i = 0; i < guests.length; i++) invitees.push(guests[i].username)
+        const unformattedExpiry = expiration
+        const spacedExpiry = unformattedExpiry.replace("T", " ")
+        const expiry = spacedExpiry.substring(0, 19)
+        const dataObject = {
+            requestId: requestId,
+            userId: hostId,
+            inviteeEmails: invitees,
+            restaurantIds: keepers,
+            decisionDateTime: expiry
         }
-        setSubmitted(true)
+        axios.put(baseUrl + '/request/update', dataObject)
+        .then(function (response){
+            if(response.data.length === 0) {
+                alert("There was a problem while saving the invitation!!!")
+                return
+            }
+            setSubmitted(true)
+        })
     }
 
     function displayCandidates() {

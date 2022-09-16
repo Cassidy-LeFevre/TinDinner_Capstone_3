@@ -21,6 +21,10 @@ export default function isOpen(hoursList) {
     const dayBeforeClosingString = dayBeforeString.split("–")[1]
     let closingIsPm = true
     let dayBeforeClosingIsPm = true
+    if(closingString === undefined || dayBeforeClosingString === undefined) {
+        alert("There was a problem fetching open hours!!!  Check hours details for open hours.")
+        return false
+    }
     if(closingString.charAt(closingString.length - 2) === "A") closingIsPm = false
     if(dayBeforeClosingString.charAt(dayBeforeClosingString.length - 2) === "A") dayBeforeClosingIsPm = false
     let openingIsPm = openingString.includes("P") ? true : openingString.includes("A") ? false : closingIsPm ? true : false

@@ -55,6 +55,18 @@ export default function Home(props) {
         setState(event.target.value)
     }
 
+    function clearEmail() {
+        setSearchEmail("")
+    }
+
+    React.useEffect(() => {
+        refreshPage()
+    }, [searchEmail])
+
+    function refreshPage() {
+        //refreshes the page
+    }
+
     function submitLocation(event) {
         event.preventDefault()
         if(zip !== "") {
@@ -185,6 +197,7 @@ export default function Home(props) {
                 }
             }
             setInvitedGuests([...invitedGuests, guestId])
+            clearEmail()
         }
     }
 
@@ -311,7 +324,7 @@ export default function Home(props) {
                             {finalist.phoneNumber &&
                                 <>
                                     <h3 className="choices--phone">{finalist.phoneNumber}</h3>
-                                    <button className="choices--call">Call to order</button>
+                                    <button className="choices--call" onclick="window.open('tel:900300400');">Call to order</button>
                                 </>
                             }
                             <h4 className="choices--type">{finalist.type}</h4>
