@@ -6,6 +6,7 @@ import isOpen from "../Home/isOpen";
 
 export default function Guest(props) {
 
+    // Establish state variables for storing state data
     const [requestId, setRequestId] = React.useState(0)
     const [host, setHost] = React.useState("")
     const [hostId, setHostId] = React.useState(0)
@@ -16,6 +17,7 @@ export default function Guest(props) {
     const [submitted, setSubmitted] = React.useState(false)
     const [guests, setGuests] = React.useState([])
 
+    // Use Effect hooks for page-refreshes
     React.useEffect(() => {
         getInvitation()
     }, [])
@@ -28,7 +30,7 @@ export default function Guest(props) {
         displayCandidates()
     }, [choices])
     
-
+    // Read invitation data from the DB and assign elements to state variables for later use
     function getInvitation() {
         axios.get(baseUrl + "/request/" + props.invitationId)
         .then(function (response){
@@ -42,6 +44,7 @@ export default function Guest(props) {
         })
     }
 
+    // Build choices to display and initialize a new "voted" property for each one
     function discoverCandidates() {
         if(options.length === 0) return
         let buildChoices = []
@@ -52,6 +55,7 @@ export default function Guest(props) {
         }
     }
 
+    // Switch radio button selections for voting feature
     function handleRadio(event) {
         let choiceList = choices
         for(let i = 0; i < choiceList.length; i++) {
@@ -63,6 +67,7 @@ export default function Guest(props) {
         setChoices(choiceList)
     }
     
+    // Store voting data to the DB and save only entries without a thumbs-down vote
     function submitPreferences() {
         let keepers = []
         let invitees = []
@@ -88,6 +93,7 @@ export default function Guest(props) {
         })
     }
 
+    // Render all restaurant choices to the DOM
     function displayCandidates() {
         return (
             <ul className="guest--list">
@@ -118,6 +124,7 @@ export default function Guest(props) {
 
     }
 
+    // Main DOM rendering block with conditional elements
     return (
         <div className="guest--container">
             {!submitted && <div>

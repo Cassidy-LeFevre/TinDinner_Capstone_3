@@ -6,10 +6,12 @@ import isOpen from './isOpen';
 import isExpired from './isExpired';
 import beautifyDate from './beautifyDate';
 
-export default function Home(props) {
+export default function Home() {
 
+    // Assign user from Redux state
     const loadedUser = useSelector(state => state.user)
 
+    // Establish state variables to hold page data
     const [mode, setMode] = React.useState("home")
 
     const [zip, setZip] = React.useState("")
@@ -27,20 +29,7 @@ export default function Home(props) {
     const [pending, setPending] = React.useState([])
     const [expired, setExpired] = React.useState([])
 
-    function clearState() {
-        setZip("")
-        setCity("")
-        setState("")
-        setChoices([])
-        setSelections([])
-        setSearchEmail("")
-        setInvitedGuests([])
-        setDecisionDate("")
-        setInvitationId("")
-        setPending([])
-        setExpired([])
-    }
-
+    // Functions that set state
     function getLocation() {
         setMode("locate")
     }
@@ -48,9 +37,11 @@ export default function Home(props) {
     function enterZip(event) {
         setZip(event.target.value)
     }
+    
     function enterCity(event) {
         setCity(event.target.value)
     }
+
     function enterState(event) {
         setState(event.target.value)
     }
@@ -59,6 +50,19 @@ export default function Home(props) {
         setSearchEmail("")
     }
 
+    function updateSearchEmail(event) {
+        setSearchEmail(event.target.value)
+    }
+
+    function updateDate(event) {
+        setDecisionDate(event.target.value)
+    }
+
+    function returnHome() {
+        setMode("home")
+    }
+
+    // Use effects to refresh page when state object updates
     React.useEffect(() => {
         refreshPage()
     }, [searchEmail])
@@ -67,6 +71,7 @@ export default function Home(props) {
         //refreshes the page
     }
 
+    // Receive location filters and establish choices of restaurants to display based on results
     function submitLocation(event) {
         event.preventDefault()
         if(zip !== "") {
@@ -104,11 +109,13 @@ export default function Home(props) {
         else alert("Please enter a ZIP Code or City and State to search!!!")
     }
 
+    // Toggle selection of restaurants by host
     function isSelected(choiceId) {
         for(let i = 0; i < selections.length; i++) if(selections[i] == choiceId) return true
         return false
     }
 
+    // Add selected restaurants to final selection array in state
     function addRestaurantToSelections(event) {
         const choiceId = event.target.id
         if(selections.length >= 5) {
@@ -127,6 +134,7 @@ export default function Home(props) {
         }
     }
 
+    // remove restaurants from selection list when unselected by the host
     function removeRestaurantFromSelections(event) {
         const removeId = event.target.id
         if(selections.length === 0) {
@@ -142,10 +150,12 @@ export default function Home(props) {
         setSelections(workingSelections)
     }
 
+    // On finishing selections of restaurants display invitation screen to the host
     function generateInvitation() {
         setMode("invite")
     }
 
+    // Render the selected restaurants to the DOM
     function showCandidates() {
         if((zip !== "")||(city !== "" && state !== "")) {
             return (
@@ -174,6 +184,7 @@ export default function Home(props) {
         }
     }
 
+    // Render the listed guests to the DOM
     function listGuests() {
         return (
             <ul className="invite--list">
@@ -186,6 +197,7 @@ export default function Home(props) {
         )
     }
 
+    // Add a guest to the list of selected invitees
     function addGuest(event) {
         const guestId = event.target.id
         if(invitedGuests.length === 0) setInvitedGuests([guestId])
@@ -201,20 +213,14 @@ export default function Home(props) {
         }
     }
 
+    // Remove a guest from the list of selected invitees
     function removeGuest(guestName) {
         let workingGuests = []
         for(let i = 0; i < invitedGuests.length; i++) if(invitedGuests[i] != guestName) workingGuests.push(invitedGuests[i])
         setInvitedGuests(workingGuests)
     }
 
-    function updateSearchEmail(event) {
-        setSearchEmail(event.target.value)
-    }
-
-    function updateDate(event) {
-        setDecisionDate(event.target.value)
-    }
-
+    // Save the invitation to the DB
     function submitInvite(event) {
         event.preventDefault()
         if(invitedGuests.length === 0) {
@@ -243,11 +249,13 @@ export default function Home(props) {
         setMode("link")
     }
 
+    // Display requests saved under the host's account
     function reviewRequests() {
         setMode("review")
         getRequests()
     }
 
+    // Pull requests saved by the host from the DB and set state variables to store the results
     function getRequests() {
         axios.get(baseUrl + "/request-by-creator/" + loadedUser.id)
         .then(function (response){
@@ -263,6 +271,7 @@ export default function Home(props) {
         })
     }
 
+    // Render the list of requests save in the host's account to the DOM after sorting active and expired requests
     function listRequests() {
             return (
                 <div className="finalist--container">
@@ -292,6 +301,7 @@ export default function Home(props) {
             )
     }
 
+    // Render the list of guests saved in a request to the DOM
     function displayInvitedGuests(req) {
         console.log(req.invitedParticipants)
         return (
@@ -307,6 +317,7 @@ export default function Home(props) {
         )
     }
 
+    // Render the finalized requests to the DOM that have been pre-sorted by expiration status
     function displayResults(req) {
         return (
             <div>
@@ -336,10 +347,7 @@ export default function Home(props) {
         )
     }
 
-    function returnHome() {
-        setMode("home")
-    }
-
+    // Main DOM rendering block with conditional elements
     return(
         <div>
 
