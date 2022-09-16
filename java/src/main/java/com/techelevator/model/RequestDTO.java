@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 public class RequestDTO {
 
 
-    int requestId;
+    int requestId = 0;
 
     @JsonProperty("userId")
     long userId;

@@ -34,6 +34,18 @@ public class RequestService{
 
 
     public Request saveRequest(RequestDTO requestDTO){
+        return requestRepository.save(convertDtoToRequest(requestDTO));
+    }
+
+    public Request updateRequest(RequestDTO requestDTO){
+        if(requestRepository.findByRequestId(requestDTO.getRequestId()) != null){
+            return requestRepository.save(convertDtoToRequest(requestDTO));
+        } else {
+            return null;
+        }
+    }
+
+    public Request convertDtoToRequest(RequestDTO requestDTO){
 
         User creator = userRepository.findByUserId(requestDTO.getUserId());
 
@@ -45,7 +57,7 @@ public class RequestService{
             } else {
                 Participant newParticipant = new Participant();
                 newParticipant.setUsername(inviteeEmail);
-               invitedParticipants.add(participantRepository.save(newParticipant));
+                invitedParticipants.add(participantRepository.save(newParticipant));
             }
         }
 
@@ -59,11 +71,14 @@ public class RequestService{
         LocalDateTime dateTime = LocalDateTime.parse(requestDTO.getDecisionDateTime(), formatter);
         Timestamp timestamp = Timestamp.valueOf(dateTime);
 
-        Request request = new Request(creator,invitedParticipants,restaurants, timestamp);
+        Request request;
 
-        return requestRepository.save(request);
+        if(requestDTO.getRequestId() != 0){
+           request = new Request(requestDTO.getRequestId(), creator, invitedParticipants, restaurants, timestamp);
+        } else {
+            request = new Request(creator, invitedParticipants, restaurants, timestamp);
+        }
+        return request;
     }
-
-
 
 }

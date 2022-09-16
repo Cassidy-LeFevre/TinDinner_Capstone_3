@@ -55,6 +55,14 @@ public class Request {
         this.decisionDateTime = decisionDateTime;
     }
 
+    public Request(int requestId, User creator, Set<Participant> invitedParticipants, Set<Restaurant> restaurantsByRequest, Timestamp decisionDateTime) {
+        this.requestId = requestId;
+        this.creator = creator;
+        this.invitedParticipants = invitedParticipants;
+        this.restaurantsByRequest = restaurantsByRequest;
+        this.decisionDateTime = decisionDateTime;
+    }
+
     public int getRequestId() {
         return requestId;
     }

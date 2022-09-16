@@ -45,5 +45,10 @@ public class RequestController {
         return requestRepository.findByCreatorId(id);
     }
 
+    @PutMapping("/request/update")
+    Request updateRequest(@RequestBody RequestDTO requestDTO){
+        return requestService.updateRequest(requestDTO);
+    }
+
 
 }
