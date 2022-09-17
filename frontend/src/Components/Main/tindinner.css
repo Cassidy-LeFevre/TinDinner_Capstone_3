@@ -323,7 +323,7 @@
 }
 
 .choices--map {
-    
+
 }
 
 .choices--open {
@@ -431,6 +431,13 @@
     width: 300px;
     margin: 10px;
     margin-bottom: 20px;
+}
+.link--email {
+
+}
+
+.link--sent {
+
 }
 
 .review--container {

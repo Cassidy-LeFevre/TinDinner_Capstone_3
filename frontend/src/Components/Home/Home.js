@@ -29,6 +29,8 @@ export default function Home() {
     const [pending, setPending] = React.useState([])
     const [expired, setExpired] = React.useState([])
 
+    const [mailed, setMailed] = React.useState(false)
+
     // Functions that set state
     function getLocation() {
         setMode("locate")
@@ -354,6 +356,13 @@ export default function Home() {
         )
     }
 
+    function sendEmails() {
+        for(let i = 0; i < invitedGuests.length; i++) {
+            //email from loadedUser.username to invitedGuests[i] ENDPOINT AND SMTP SERVER CALL REQUIRED
+        }
+        setMailed(true)
+    }
+
     // Main DOM rendering block with conditional elements
     return(
         <div>
@@ -398,6 +407,8 @@ export default function Home() {
             {mode==="link" && <div className="link--container">
                 <h2 className="link--title">Invitation saved!  Here is the link your guests can visit to vote on your restaurant selections:</h2>
                 <h3 className="link--link">{baseUrl + "/guest/" + invitationId}</h3>
+                {!mailed && <button className="link--email" onClick={sendEmails}>Click here to email the link to your invited guests</button>}
+                {mailed && <h4 className="link-sent">Emails have been sent to your invited guests</h4>}
             </div>}
 
             {mode==="review" && <div className="review--container">
