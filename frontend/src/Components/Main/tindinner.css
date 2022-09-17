@@ -596,11 +596,13 @@
 
 .guest--up {
     margin-right: 5px;
+    margin-bottom: 20px;
 }
 
 .guest--down {
     margin-right: 5px;
     margin-left: 20px;
+    margin-bottom: 20px;
 }
 
 .guest--submit {

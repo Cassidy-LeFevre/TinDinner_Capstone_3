@@ -120,8 +120,8 @@ export default function Guest(props) {
                         <h4 className="choices--type">{choice.type}</h4>
                         <br/>
                         <div className="guest--radio" onChange={handleRadio}>
-                            <input className="guest--up" type="radio" value="thumbs-up" name="vote" id={choice.restaurantId} />Thumbs-up!
-                            <input className="guest--down" type="radio" value="thumbs-down" name="vote" id={choice.restaurantId} />Thumbs-down!
+                            <input className="guest--up" type="radio" value="thumbs-up" name="vote" id={choice.restaurantId} />👍
+                            <input className="guest--down" type="radio" value="thumbs-down" name="vote" id={choice.restaurantId} />👎
                         </div>
                     </li>
                 ))}
