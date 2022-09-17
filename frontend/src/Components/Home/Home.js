@@ -155,6 +155,11 @@ export default function Home() {
         setMode("invite")
     }
 
+    // Open a Google Maps window with restaurant address
+    function mapAddress(event) {
+        window.open("http://maps.google.com/maps?q=" + event.target.id)
+    }
+
     // Render the selected restaurants to the DOM
     function showCandidates() {
         if((zip !== "")||(city !== "" && state !== "")) {
@@ -165,6 +170,7 @@ export default function Home() {
                             <h3 className="choices--name">{choice.restaurantName}</h3>
                             {choice.thumbnailUrl && <img  className="choices--image" src={choice.thumbnailUrl} Alt="Restaurant view"/>}
                             <h4 className="choices--address">{choice.address}</h4>
+                            <button className="choices--map" id={choice.address} onClick={mapAddress}>View on Google Maps</button>
                             {isOpen(choice.hours) && <h4 className="choices--open">Open now</h4>}
                             {!isOpen(choice.hours) && <h4 className="choices--closed">Closed</h4>}
                             <p className="choices--hours">{choice.hours}</p>
@@ -329,6 +335,7 @@ export default function Home() {
                             <h3 className="choices--name">{finalist.restaurantName}</h3>
                             {finalist.thumbnailUrl && <img  className="choices--image" src={finalist.thumbnailUrl} Alt="Restaurant view"/>}
                             <h4 className="choices--address">{finalist.address}</h4>
+                            <button className="choices--map" id={finalist.address} onClick={mapAddress}>View on Google Maps</button>
                             {isOpen(finalist.hours) && <h4 className="choices--open">Open now</h4>}
                             {!isOpen(finalist.hours) && <h4 className="choices--closed">Closed</h4>}
                             <p className="choices--hours">{finalist.hours}</p>

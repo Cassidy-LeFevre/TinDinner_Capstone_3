@@ -93,6 +93,10 @@ export default function Guest(props) {
         })
     }
 
+    function mapAddress(event) {
+        window.open("http://maps.google.com/maps?q=" + event.target.id)
+    }
+
     // Render all restaurant choices to the DOM
     function displayCandidates() {
         return (
@@ -102,6 +106,7 @@ export default function Guest(props) {
                         <h3 className="choices--name">{choice.restaurantName}</h3>
                         {choice.thumbnailUrl && <img  className="choices--image" src={choice.thumbnailUrl} Alt="Restaurant view"/>}
                         <h4 className="choices--address">{choice.address}</h4>
+                        <button className="choices--map" id={choice.address} onClick={mapAddress}>View on Google Maps</button>
                         {isOpen(choice.hours) && <h4 className="choices--open">Open now</h4>}
                         {!isOpen(choice.hours) && <h4 className="choices--closed">Closed</h4>}
                         <p className="choices--hours">{choice.hours}</p>
