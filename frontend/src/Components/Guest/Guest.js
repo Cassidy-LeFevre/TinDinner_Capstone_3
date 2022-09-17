@@ -93,6 +93,7 @@ export default function Guest(props) {
         })
     }
 
+    // Open a Google Maps window with restaurant address
     function mapAddress(event) {
         window.open("http://maps.google.com/maps?q=" + event.target.id)
     }

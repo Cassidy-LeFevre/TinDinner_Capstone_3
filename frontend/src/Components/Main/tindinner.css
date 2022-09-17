@@ -121,7 +121,6 @@
 }
 
 .register--page {
-    /* box-sizing: border-box; */
     display: flex;
     justify-content: center;
 }
@@ -311,6 +310,9 @@
 
 .choices--name {
     margin: 10px;
+    background-color:#470953;
+    color:#c0abe0;
+    width: 100%;
 }
 
 .choices--image {
@@ -323,17 +325,19 @@
 }
 
 .choices--map {
-
+    margin-bottom: 10px;
 }
 
 .choices--open {
     background-color:#75dbb6;
     padding: 10px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
 }
 
 .choices--closed {
     background-color:#db7c75;
     padding: 10px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
 }
 
 .choices--hours {
@@ -433,11 +437,11 @@
     margin-bottom: 20px;
 }
 .link--email {
-
+    margin-bottom: 20px;
 }
 
 .link--sent {
-
+    margin-bottom: 20px;
 }
 
 .review--container {
@@ -449,6 +453,10 @@
 
 .review--title {
     color:#e4c3f1;
+    background-color:#390850;
+    padding: 105px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .review--home {
@@ -456,11 +464,18 @@
 }
 
 .finalist--container {
-    
+    display: flex;
+    flex-direction: column;
+    background-color:#c9a9f3;
+    align-self: center;
 }
 
 .finalist--completed {
-    color:#e0b3f5
+    color:#e0b3f5;
+    background-color:#390850;
+    padding: 60px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .finalist--completedlist {
@@ -472,11 +487,16 @@
 }
 
 .finalist--expireddate {
-    color:#177245
+    color:#177245;
 }
 
 .finalist--pending {
-    color:#e0b3f5
+    color:#e0b3f5;
+    background-color:#390850;
+    padding: 60px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 40px;
 }
 
 .finalist--pendinglist {
@@ -511,10 +531,19 @@
     
 }
 
+.preferred--break {
+    width: 100%;
+    margin-left: 0px;
+    background-color:#9073e0;
+    opacity: 1;
+    padding: 20px;
+}
+
 .guest--container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
 }
 
 .guest--creator {
@@ -566,17 +595,19 @@
 }
 
 .guest--up {
-    
+    margin-right: 5px;
 }
 
 .guest--down {
-    
+    margin-right: 5px;
+    margin-left: 20px;
 }
 
 .guest--submit {
-
+    margin-bottom: 20px;
 }
 
 .guest--submitted {
-
+    margin-bottom: 20px;
+    color:#ebdaff;
 }

@@ -283,7 +283,6 @@ export default function Home() {
     function listRequests() {
             return (
                 <div className="finalist--container">
-                    <hr/>
                     <h3 className="finalist--completed">Completed Requests</h3>
                     <ul className="finalist--completedlist">
                         {expired.map((inv) => (
@@ -294,7 +293,6 @@ export default function Home() {
                             </li>
                         ))}
                     </ul>
-                    <hr/>
                     <h3 className="finalist--pending">Pending Requests</h3>
                     <ul className="finalist--pendinglist">
                         {pending.map((inv) => (
@@ -350,8 +348,8 @@ export default function Home() {
                             <h4 className="choices--type">{finalist.type}</h4>
                         </li>
                     ))}
-                    <hr/>
                 </ul>
+                <hr className="preferred--break"/>
             </div>
         )
     }
@@ -413,9 +411,7 @@ export default function Home() {
 
             {mode==="review" && <div className="review--container">
                 <h2 className="review--title">Your Requests</h2>
-                <hr/>
                 {listRequests()}
-                <hr/>
                 <button className="review--home" onClick={returnHome}>Done</button>
             </div>}
 
