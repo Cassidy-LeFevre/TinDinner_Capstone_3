@@ -169,22 +169,28 @@ export default function Home() {
                 <ul className="choices--list">
                     {choices.map((choice) => (
                         <li className="choices--listitem" id={choice.restaurantId} choiceZip={choice.zipCode}>
+                            <div className='name--image'>
                             <h3 className="choices--name">{choice.restaurantName}</h3>
                             {choice.thumbnailUrl && <img  className="choices--image" src={choice.thumbnailUrl} Alt="Restaurant view"/>}
+                            </div>
+                            <div className='info--div'>
                             <h4 className="choices--address">{choice.address}</h4>
-                            <button className="choices--map" id={choice.address} onClick={mapAddress}>View on Google Maps</button>
-                            {isOpen(choice.hours) && <h4 className="choices--open">Open now</h4>}
-                            {!isOpen(choice.hours) && <h4 className="choices--closed">Closed</h4>}
-                            <p className="choices--hours">{choice.hours}</p>
-                            {choice.phoneNumber &&
+                             {choice.phoneNumber &&
                                 <>
                                     <h3 className="choices--phone">{choice.phoneNumber}</h3>
                                     <button className="choices--call">Call to order</button>
                                 </>
                             }
+                            <button className="choices--map" id={choice.address} onClick={mapAddress}>View on Google Maps</button>
+                            {isOpen(choice.hours) && <h4 className="choices--open">Open now</h4>}
+                            {!isOpen(choice.hours) && <h4 className="choices--closed">Closed</h4>}
+                            <p className="choices--hours">{choice.hours}</p>
+                           
+                            
                             <h4 className="choices--type">{choice.type}</h4>
                             {!isSelected(choice.restaurantId) && <button className="choices--add" id={choice.restaurantId} onClick={addRestaurantToSelections}>Add to invitation</button>}
                             {isSelected(choice.restaurantId) && <button className="choices--remove" id={choice.restaurantId} onClick={removeRestaurantFromSelections}>Remove from invitation</button>}
+                        </div>
                         </li>
                     ))}
                 </ul>

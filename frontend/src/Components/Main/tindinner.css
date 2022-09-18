@@ -1,7 +1,9 @@
+
 .main--container {
-    background-color:#9073e0;
+    background-color:#392759;
     display: flex;
     flex-direction: column;
+
 }
 
 .main--navbar {
@@ -12,7 +14,7 @@
 }
 
 .main--logo {
-    max-height: 60px;
+    max-height: 50px;
 }
 
 .main--home {
@@ -41,7 +43,7 @@
     background-position: center;
     font-family:'Oswald';
     font-style:normal;
-    margin-top: 50px;
+    margin-bottom: 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -53,7 +55,7 @@
     align-items: center;
     text-align: center;
     height: 600px;
-    width: 90vw;
+    width: 50vw;
     background: #F6D2FC;
     padding: 100px;
     margin: 20px;
@@ -114,20 +116,26 @@
     text-decoration: none;
     font-display:inherit;
     border: none;
-    background:rgb(95, 8, 129);
+   background-color: #AD78F0;
     padding: 5px;
-    color:#decdff;
+    color:#ffffff;
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-weight: bold;
 }
 
 .register--page {
+    height: 100vh;
+    /* box-sizing: border-box; */
     display: flex;
     justify-content: center;
+    align-content: center;
 }
 
 .register--form {
-    width: 400px;
+    background-color: white;
+    width: 800px;
     padding: 20px;
+    height: 60vh;
 }
 
 .register--title {
@@ -222,62 +230,88 @@
 .home--container {
     display: flex;
     flex-direction: column;
+    background-color: #8693AB;
+    background-image: url("food-trends-1.jpg");
+    padding: 38vh;
 }
 
 .home--send {
-    width: 200px;;
+    width: 500px;;
     align-self: center;
     margin: 20px;
     margin-bottom: 0px;
+    font-size: 35px;
 }
 
 .home--review {
-    width: 200px;
+    width: 500px;
     align-self: center;
     margin: 20px;
+    margin-bottom: 0px;
+    font-size: 35px;
 }
 
 .locate--container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 93vh;
+    background-color: #E8F0FF;
+    
 }
 
 .locate--title {
-    color:#decdff;
+    color:#000000;
     font-size: 40px;
 }
 
 .locate--form {
     text-align: center;
+    width: 70vh;
+    background-color: #8693AB;
+    border-radius: 25px;
+    padding: 35px;
 }
 
 .locate--zip {
+    border-radius: 5px;
+    
     
 }
 
 .locate--or {
     text-align: center;
-    color:#decdff;
+    color:#000000;
     margin: 20px;
 }
 
 .locate--city {
     margin: 5px;
+    border-radius: 5px;
 }
 
 .locate--state {
     margin: 5px;
+    border-radius: 5px;
 }
 
 .locate--submit {
     margin: 10px;
+    background-color: #3e5dff;
+    color: #fdfdff;
+    width: 150px;
+    font-weight: bold;
+    text-decoration: none;
+    border: none;
+    border-radius: 25px;
 }
 
 .choices--container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: #D5B3DB;
+
 }
 
 .choices--generate {
@@ -290,10 +324,11 @@
 }
 
 .choices--list {
-    background:#decdff;
+    background:#8693AB;
     display: flex;
     flex-direction: column;
-    width: 400px;
+    width:60vw;
+
 }
 
 .choices--listitem {
@@ -301,37 +336,55 @@
     list-style: none;
     margin: 30px;
     margin-left: 0px;
-    background-color:#e4c3f1;
-    border: solid 1px #6b3377;
     display: flex;
-    flex-direction: column;
     align-items: center;
 }
+.name---image{
+    position: relative;
+    display: flex;
+    flex-direction: column;
 
+}
 .choices--name {
-    margin: 10px;
-    background-color:#470953;
-    color:#c0abe0;
+    margin: 60px;
+    font-size: 40px;
+    color:#000000;
     width: 100%;
+    margin-top: 50px;
+    display: block;
+    position: relative;
+    right: 60px;
+    top: -15px;
 }
 
 .choices--image {
-    width: 300px;
+    max-width: 500px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+    margin-bottom: 100px;
+    height: auto;
+    position: relative;
+    top: -70px;
+
 }
 
 .choices--address {
-    width: 300px;
+
 }
 
 .choices--map {
     margin-bottom: 10px;
+    border-radius: 25px;
+    text-decoration: none;
+    background-color: #D9D9D9;    
+    border: none;
 }
 
 .choices--open {
-    background-color:#75dbb6;
+    background-color:#178021;
     padding: 10px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+    color: white;
+    text-align: center;
 }
 
 .choices--closed {
@@ -345,38 +398,61 @@
 }
 
 .choices--phone {
-    
+    border-radius: 25px;
+    border: none;
+
 }
 
 .choices--call {
     margin-bottom: 10px;
+    border-radius: 25px;
+    text-decoration: none;
+    background-color: #D9D9D9;
+    border: none;
+    margin: 10px;
 }
 
 .choices--type {
-    color:#6b3377;
+    font-size: 20px;
+    color: #000000;
+
 }
 
 .choices--add {
     margin: 20px;
+    height: 70px;
+    width: 300px;
+    border: none;
+    font-size: 30px;
 }
 
 .choices--remove {
     margin: 20px;
+    height: 70px;
+    width: 300px;
+    border: none;
+    font-weight: bold;
+}
+.info--div{
+    background-color: #8693AB;
+    align-content: left;
+    margin: 30px;
 }
 
 .invite--container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color:#decdff;
+    background-color:#D9D9D9;
+    height: 93vh;
 }
 
 .invite--title {
-    margin: 10px;
+
 }
 
 .invite--form {
-    background-color:#AD78F0;
+    background-color:#FFFFFF;
     padding: 40px;
     padding-bottom: 20px;
     margin-bottom: 40px;
@@ -411,7 +487,7 @@
 
 .invite--listitem {
     margin-bottom: 5px;
-    background-color:#e4c3f1;
+    background-color:#ffffff;
     border: solid 2px black;
 }
 
@@ -424,14 +500,17 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: #D9D9D9;
+    height: 94vh;
+    justify-content: center;
 }
 
 .link--title {
-    color:#e4c3f1;
+    color:#000000;
 }
 
 .link--link {
-    color:#decdff;
+    color:#000000;
     width: 300px;
     margin: 10px;
     margin-bottom: 20px;
@@ -449,6 +528,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    
 }
 
 .review--title {
@@ -461,6 +541,7 @@
 
 .review--home {
     margin-bottom: 20px;
+    
 }
 
 .finalist--container {
