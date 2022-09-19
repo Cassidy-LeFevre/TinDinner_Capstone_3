@@ -178,15 +178,13 @@ export default function Home() {
                              {choice.phoneNumber &&
                                 <>
                                     <h3 className="choices--phone">{choice.phoneNumber}</h3>
-                                    <button className="choices--call">Call to order</button>
+                                    <button id={choice.phoneNumber} className="choices--call" onclick={makeCall}>Call to order</button>
                                 </>
                             }
                             <button className="choices--map" id={choice.address} onClick={mapAddress}>View on Google Maps</button>
                             {isOpen(choice.hours) && <h4 className="choices--open">Open now</h4>}
                             {!isOpen(choice.hours) && <h4 className="choices--closed">Closed</h4>}
                             <p className="choices--hours">{choice.hours}</p>
-                           
-                            
                             <h4 className="choices--type">{choice.type}</h4>
                             {!isSelected(choice.restaurantId) && <button className="choices--add" id={choice.restaurantId} onClick={addRestaurantToSelections}>Add to invitation</button>}
                             {isSelected(choice.restaurantId) && <button className="choices--remove" id={choice.restaurantId} onClick={removeRestaurantFromSelections}>Remove from invitation</button>}
@@ -315,7 +313,6 @@ export default function Home() {
 
     // Render the list of guests saved in a request to the DOM
     function displayInvitedGuests(req) {
-        console.log(req.invitedParticipants)
         return (
             <div>
                 <h4 className="invitedguests--title">Guests Invited</h4>
@@ -348,7 +345,7 @@ export default function Home() {
                             {finalist.phoneNumber &&
                                 <>
                                     <h3 className="results--phone">{finalist.phoneNumber}</h3>
-                                    <button className="results--call" onclick="window.open('tel:900300400');">Call to order</button>
+                                    <button id={finalist.phoneNumber} className="results--call" onclick={makeCall}>Call to order</button>
                                 </>
                             }
                             <h4 className="results--type">{finalist.type}</h4>
@@ -360,12 +357,18 @@ export default function Home() {
         )
     }
 
-    function sendEmails() {
-        for(let i = 0; i < invitedGuests.length; i++) {
-            //email from loadedUser.username to invitedGuests[i] ENDPOINT AND SMTP SERVER CALL REQUIRED
-        }
-        setMailed(true)
+    // prompt phone call in browser (untested - mobile device not available for dev)
+    function makeCall(event) {
+        event.preventDefault()
+        window.open('tel:' + event.target.id)
     }
+
+    // function sendEmails() {
+    //     for(let i = 0; i < invitedGuests.length; i++) {
+    //         //email from loadedUser.username to invitedGuests[i] ENDPOINT AND SMTP SERVER CALL REQUIRED
+    //     }
+    //     setMailed(true)
+    // }
 
     // Main DOM rendering block with conditional elements
     return(
@@ -411,8 +414,8 @@ export default function Home() {
             {mode==="link" && <div className="link--container">
                 <h2 className="link--title">Invitation saved!  Here is the link your guests can visit to vote on your restaurant selections:</h2>
                 <h3 className="link--link">{"http://localhost:3000/guest/" + invitationId}</h3>
-                {!mailed && <button className="link--email" onClick={sendEmails}>Click here to email the link to your invited guests</button>}
-                {mailed && <h4 className="link-sent">Emails have been sent to your invited guests</h4>}
+                {/* {!mailed && <button className="link--email" onClick={sendEmails}>Click here to email the link to your invited guests</button>}
+                {mailed && <h4 className="link-sent">Emails have been sent to your invited guests</h4>} */}
             </div>}
 
             {mode==="review" && <div className="review--container">

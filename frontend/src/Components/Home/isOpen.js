@@ -31,6 +31,10 @@ export default function isOpen(hoursList) {
     let dayBeforeOpeningIsPm = dayBeforeOpeningString.includes("P") ? true : dayBeforeOpeningString.includes("A") ? false : dayBeforeClosingIsPm ? true : false
     let openingHourString = "";
     let openingMinuteString = "";
+    if(openingString === undefined || dayBeforeOpeningString === undefined) {
+        alert("There was a problem fetching open hours!!!  Check hours details for open hours.")
+        return false
+    }
     for(let i = 0; i < openingString.length; i++) {
         if(isNaN(openingString.charAt(i))) {
             if(openingString.charAt(i) === ":") openingMinuteString = openingString.charAt(i + 1) + openingString.charAt(i + 2)
