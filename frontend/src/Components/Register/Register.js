@@ -69,7 +69,9 @@ export default function Register(props) {
                     onChange={handleInputChange}
                     required
                 />
+                <p className="register--emailrequirement">Username must be a valid emaill address.</p>
                 <label class="sr-only">Password</label>
+
                 <input className="register--password"
                     type="password"
                     id="password"
@@ -90,6 +92,7 @@ export default function Register(props) {
                     onChange={handleInputChange}
                     required
                 />
+                <p className="register--passwordrequirement">Passwords must contain at least one capital letter, one lowercase letter and one numeral.  It must be at least 8 characters long.</p>
                 <Link to="/login" className="register--login">Have an account?</Link>
                 <input className="register--submit" type="submit" onClick={handleSubmit} />
             </form>}

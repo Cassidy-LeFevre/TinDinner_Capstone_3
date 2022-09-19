@@ -337,21 +337,21 @@ export default function Home() {
                 <ul>
                     {req.restaurantsByRequest.length === 0 && <p className="preferred--none">There are no restaurants to display.</p>}
                     {req.restaurantsByRequest.map((finalist) => (
-                        <li className="choices--listitem" id={finalist.restaurantId}>
-                            <h3 className="choices--name">{finalist.restaurantName}</h3>
-                            {finalist.thumbnailUrl && <img  className="choices--image" src={finalist.thumbnailUrl} Alt="Restaurant view"/>}
-                            <h4 className="choices--address">{finalist.address}</h4>
-                            <button className="choices--map" id={finalist.address} onClick={mapAddress}>View on Google Maps</button>
-                            {isOpen(finalist.hours) && <h4 className="choices--open">Open now</h4>}
-                            {!isOpen(finalist.hours) && <h4 className="choices--closed">Closed</h4>}
-                            <p className="choices--hours">{finalist.hours}</p>
+                        <li className="results--listitem" id={finalist.restaurantId}>
+                            <h3 className="results--name">{finalist.restaurantName}</h3>
+                            {finalist.thumbnailUrl && <img  className="results--image" src={finalist.thumbnailUrl} Alt="Restaurant view"/>}
+                            <h4 className="results--address">{finalist.address}</h4>
+                            <button className="results--map" id={finalist.address} onClick={mapAddress}>View on Google Maps</button>
+                            {isOpen(finalist.hours) && <h4 className="results--open">Open now</h4>}
+                            {!isOpen(finalist.hours) && <h4 className="results--closed">Closed</h4>}
+                            <p className="results--hours">{finalist.hours}</p>
                             {finalist.phoneNumber &&
                                 <>
-                                    <h3 className="choices--phone">{finalist.phoneNumber}</h3>
-                                    <button className="choices--call" onclick="window.open('tel:900300400');">Call to order</button>
+                                    <h3 className="results--phone">{finalist.phoneNumber}</h3>
+                                    <button className="results--call" onclick="window.open('tel:900300400');">Call to order</button>
                                 </>
                             }
-                            <h4 className="choices--type">{finalist.type}</h4>
+                            <h4 className="results--type">{finalist.type}</h4>
                         </li>
                     ))}
                 </ul>
@@ -410,7 +410,7 @@ export default function Home() {
 
             {mode==="link" && <div className="link--container">
                 <h2 className="link--title">Invitation saved!  Here is the link your guests can visit to vote on your restaurant selections:</h2>
-                <h3 className="link--link">{baseUrl + "/guest/" + invitationId}</h3>
+                <h3 className="link--link">{"http://localhost:3000/guest/" + invitationId}</h3>
                 {!mailed && <button className="link--email" onClick={sendEmails}>Click here to email the link to your invited guests</button>}
                 {mailed && <h4 className="link-sent">Emails have been sent to your invited guests</h4>}
             </div>}

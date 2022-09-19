@@ -3,6 +3,7 @@
     background-color:#392759;
     display: flex;
     flex-direction: column;
+   
 
 }
 
@@ -59,7 +60,7 @@
     background: #F6D2FC;
     padding: 100px;
     margin: 20px;
-
+    border-radius: 25px;
 }
 
 .login--title {
@@ -97,6 +98,7 @@
     font-weight: bold;
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
     margin-bottom: 30px;
+    border-radius: 10px;
 }
 
 .login--usernameText {
@@ -121,6 +123,7 @@
     color:#ffffff;
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
     font-weight: bold;
+    border-radius: 10px;
 }
 
 .register--page {
@@ -232,7 +235,9 @@
     flex-direction: column;
     background-color: #8693AB;
     background-image: url("food-trends-1.jpg");
+    background-repeat: no-repeat;
     padding: 38vh;
+    background-size: cover;
 }
 
 .home--send {
@@ -693,4 +698,80 @@
 .guest--submitted {
     margin-bottom: 20px;
     color:#ebdaff;
+}
+.results--list {
+    background:#8693AB;
+    display: flex;
+    flex-direction: column;
+    width:60vw;
+    display: flex;
+    align-items: center;
+}
+
+.results--listitem {
+    width: 320px;
+    list-style: none;
+    margin: 30px;
+    margin-left: 0px;
+    align-items: center;
+}
+.results--image {
+    max-width: 400px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+    margin-bottom: 100px;
+    height: auto;
+    position: relative;
+    right: 60px;
+
+}
+
+.choices--address {
+
+}
+
+.results--map {
+    margin-bottom: 10px;
+    border-radius: 25px;
+    text-decoration: none;
+    background-color: #D9D9D9;    
+    border: none;
+}
+
+.results--open {
+    background-color:#178021;
+    padding: 10px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+    color: white;
+    text-align: center;
+}
+
+.results--closed {
+    background-color:#db7c75;
+    padding: 10px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+}
+
+.results--hours {
+    width: 300px;
+}
+
+.results--phone {
+    border-radius: 25px;
+    border: none;
+
+}
+
+.results--call {
+    margin-bottom: 10px;
+    border-radius: 25px;
+    text-decoration: none;
+    background-color: #D9D9D9;
+    border: none;
+    margin: 10px;
+}
+
+.results--type {
+    font-size: 20px;
+    color: #000000;
+
 }
