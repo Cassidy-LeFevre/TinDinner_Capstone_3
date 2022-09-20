@@ -11,14 +11,15 @@ export default function isOpen(hoursList) {
     for(let i = 0; i < hoursArray.length; i++) {
         if(day === hoursArray[i].split(" ")[0]) {
             isolatedHoursString = hoursArray[i].split(" ")[1]
-            dayBeforeString = i === 0 ? hoursArray[6].split(" ")[1] : hoursArray[i - 1].split(" ")[1]
+            dayBeforeString = (i === 0 ? hoursArray[6].split(" ")[1] : hoursArray[i - 1].split(" ")[1])
         }
     }
     if(isolatedHoursString === "Closed") return false
     const openingString = isolatedHoursString.split("–")[0]
     const closingString = isolatedHoursString.split("–")[1]
-    const dayBeforeOpeningString = isolatedHoursString.split("–")[0]
-    const dayBeforeClosingString = dayBeforeString.split("–")[1]
+    const dayBeforeOpeningString = dayBeforeString.split("–")[0]
+    let dayBeforeClosingString = dayBeforeString.split("–")[1]
+    if(dayBeforeClosingString === undefined) dayBeforeClosingString = "Closed"
     let closingIsPm = true
     let dayBeforeClosingIsPm = true
     if(closingString === undefined || dayBeforeClosingString === undefined) {
