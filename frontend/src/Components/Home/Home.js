@@ -271,7 +271,6 @@ export default function Home() {
     function getRequests() {
         axios.get(baseUrl + "/request-by-creator/" + loadedUser.id)
         .then(function (response){
-            console.log(response)
             let pendingInvitations = [];
             let expiredInvitations = [];
             for(let i = 0; i < response.data.length; i++) {
