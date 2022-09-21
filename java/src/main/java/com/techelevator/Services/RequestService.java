@@ -67,16 +67,12 @@ public class RequestService{
             restaurants.add(restaurantRepository.findByRestaurantId(restaurantId));
         }
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime dateTime = LocalDateTime.parse(requestDTO.getDecisionDateTime(), formatter);
-        Timestamp timestamp = Timestamp.valueOf(dateTime);
-
         Request request;
 
         if(requestDTO.getRequestId() != 0){
-           request = new Request(requestDTO.getRequestId(), creator, invitedParticipants, restaurants, timestamp);
+           request = new Request(requestDTO.getRequestId(), creator, invitedParticipants, restaurants, requestDTO.getDecisionDateTime());
         } else {
-            request = new Request(creator, invitedParticipants, restaurants, timestamp);
+            request = new Request(creator, invitedParticipants, restaurants, requestDTO.getDecisionDateTime());
         }
         return request;
     }

@@ -27,6 +27,7 @@ public class RequestController {
 
     @GetMapping("/request/{id}")
     Request findByRequestId(@PathVariable int id){
+        System.out.println(requestRepository.findByRequestId(id).getDecisionDateTime());;
         return requestRepository.findByRequestId(id);
     }
 

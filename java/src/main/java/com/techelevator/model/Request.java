@@ -44,18 +44,18 @@ public class Request {
     @JsonManagedReference
     Set<Restaurant> restaurantsByRequest;
 
-    Timestamp decisionDateTime;
+    String decisionDateTime;
 
     public Request(){};
 
-    public Request(User creator, Set<Participant> invitedParticipants, Set<Restaurant> restaurantsByRequest, Timestamp decisionDateTime) {
+    public Request(User creator, Set<Participant> invitedParticipants, Set<Restaurant> restaurantsByRequest, String decisionDateTime) {
         this.creator = creator;
         this.invitedParticipants = invitedParticipants;
         this.restaurantsByRequest = restaurantsByRequest;
         this.decisionDateTime = decisionDateTime;
     }
 
-    public Request(int requestId, User creator, Set<Participant> invitedParticipants, Set<Restaurant> restaurantsByRequest, Timestamp decisionDateTime) {
+    public Request(int requestId, User creator, Set<Participant> invitedParticipants, Set<Restaurant> restaurantsByRequest, String decisionDateTime) {
         this.requestId = requestId;
         this.creator = creator;
         this.invitedParticipants = invitedParticipants;
@@ -71,12 +71,12 @@ public class Request {
         this.requestId = requestId;
     }
 
-    public Timestamp getDecisionDateTime() {
+    public String getDecisionDateTime() {
         return decisionDateTime;
     }
 
 
-    public void setDecisionDate(Timestamp decisionDateTime) {
+    public void setDecisionDate(String decisionDateTime) {
         this.decisionDateTime = decisionDateTime;
     }
 
