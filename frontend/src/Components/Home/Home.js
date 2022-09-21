@@ -188,6 +188,7 @@ export default function Home() {
                             <h4 className="choices--type">{choice.type}</h4>
                             {!isSelected(choice.restaurantId) && <button className="choices--add" id={choice.restaurantId} onClick={addRestaurantToSelections}>Add to invitation</button>}
                             {isSelected(choice.restaurantId) && <button className="choices--remove" id={choice.restaurantId} onClick={removeRestaurantFromSelections}>Remove from invitation</button>}
+                            <hr className='line--break'/>
                         </div>
                         </li>
                     ))}
