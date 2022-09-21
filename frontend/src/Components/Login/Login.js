@@ -26,10 +26,14 @@ class Login extends Component {
     
 
     handleLogin = async () => {
-        const data = { username: this.state.username, password: this.state.password };
-        const userWithToken = await axios.post(baseUrl + '/login', data)
-        await this.props.dispatch(addToken(userWithToken.data.token))
-        await this.props.dispatch(addUser(userWithToken.data.user));
+        try {
+            const data = { username: this.state.username, password: this.state.password };
+            const userWithToken = await axios.post(baseUrl + '/login', data)
+            await this.props.dispatch(addToken(userWithToken.data.token))
+            await this.props.dispatch(addUser(userWithToken.data.user));
+        } catch {
+            alert("Login was unsuccessful!!!  Check the username and password for accuracy.")
+        }
     }
 
     handleInputChange = (event) => {
