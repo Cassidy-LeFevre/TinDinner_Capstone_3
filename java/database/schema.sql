@@ -42,7 +42,7 @@ CREATE TABLE participant (
 CREATE TABLE request (
 	request_id int DEFAULT nextval('seq_request_id') NOT NULL,
 	user_id int NOT NULL,
-	decision_date_time TIMESTAMP NOT NULL,
+	decision_date_time varchar(100) NOT NULL,
 	CONSTRAINT FK_request_creator_id FOREIGN KEY (user_id) REFERENCES users (user_id),
 	CONSTRAINT PK_request PRIMARY KEY (request_id)
 );
